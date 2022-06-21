@@ -10,9 +10,62 @@ generator client {
 
 // Define your own datamodels here and run `yarn redwood prisma migrate dev`
 // to create migrations for them and apply to your dev DB.
-// TODO: Please remove the following example:
-model UserExample {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+
+model Customer {
+  id    Int      @id @default(autoincrement())
+  name  String
+  tasks Task[]
+}
+
+model Site {
+  id    Int      @id @default(autoincrement())
+  name  String
+  tasks Task[]
+}
+
+model Container {
+  id    Int      @id @default(autoincrement())
+  name  String
+  tasks Task[]
+}
+
+model Material {
+  id    Int      @id @default(autoincrement())
+  name  String
+  tasks Task[]
+}
+
+model Service {
+  id    Int      @id @default(autoincrement())
+  name  String
+  tasks Task[]
+}
+
+model Worker {
+  id    Int      @id @default(autoincrement())
+  name  String
+  tasks Task[]
+}
+
+model Equipment {
+  id    Int      @id @default(autoincrement())
+  name  String
+//  tasks Task[]
+}
+
+model Task {
+  id          Int       @id @default(autoincrement())
+  plannedAt   DateTime
+  worker      Worker    @relation(fields: [workerId], references: [id])
+  workerId    Int
+  customer    Customer  @relation(fields: [customerId], references: [id])
+  customerId  Int
+  site        Site      @relation(fields: [siteId], references: [id])
+  siteId      Int
+  container   Container @relation(fields: [containerId], references: [id])
+  containerId Int
+  material    Material @relation(fields: [materialId], references: [id])
+  materialId  Int
+  service     Service   @relation(fields: [serviceId], references: [id])
+  serviceId   Int
 }
