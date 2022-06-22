@@ -1,7 +1,7 @@
 import EquipmentCell from 'src/components/Equipment/EquipmentCell'
 
 type EquipmentPageProps = {
-  id: number
+  id?: number
 }
 
 const EquipmentPage = ({ id }: EquipmentPageProps) => {

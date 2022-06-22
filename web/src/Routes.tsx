@@ -9,26 +9,22 @@
 
 import { Set, Router, Route } from '@redwoodjs/router'
 
-import TasksLayout from 'src/layouts/TasksLayout'
-
+import ContainersLayout from 'src/layouts/ContainersLayout'
+import CustomersLayout from 'src/layouts/CustomersLayout'
 import EquimentLayout from 'src/layouts/EquimentLayout'
-
+import MaterialsLayout from 'src/layouts/MaterialsLayout'
+import ServicesLayout from 'src/layouts/ServicesLayout'
+import SitesLayout from 'src/layouts/SitesLayout'
+import TasksLayout from 'src/layouts/TasksLayout'
 import WorkersLayout from 'src/layouts/WorkersLayout'
 
-import ServicesLayout from 'src/layouts/ServicesLayout'
-
-import MaterialsLayout from 'src/layouts/MaterialsLayout'
-
-import ContainersLayout from 'src/layouts/ContainersLayout'
-
-import SitesLayout from 'src/layouts/SitesLayout'
-
-import CustomersLayout from 'src/layouts/CustomersLayout'
+import ConfigPage from './pages/Config/ConfigPage'
 
 const Routes = () => {
   return (
     <Router>
       <Route path="/login" page={LoginPage} name="login" />
+      <Route path="/config" page={ConfigPage} name="config" />
       <Route path="/signup" page={SignupPage} name="signup" />
       <Route path="/forgot-password" page={ForgotPasswordPage} name="forgotPassword" />
       <Route path="/reset-password" page={ResetPasswordPage} name="resetPassword" />
