@@ -234,6 +234,7 @@ const TasksList = ({ tasks }: Props) => {
     [draggedEvent, counters, setDraggedEvent, setCounters, newEvent]
   )
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleSelectEvent = useCallback((event) => {
     return (
       <Alert

@@ -92,7 +92,7 @@ hr {
   @apply mt-2 list-disc list-inside;
 }
 .rw-button {
-  @apply flex justify-center py-1 px-4 border-0 rounded bg-gray-200 text-gray-500 text-xs font-semibold uppercase tracking-wide leading-loose no-underline cursor-pointer transition duration-100;
+  @apply flex justify-center py-1 px-4 border-0 rounded-md bg-gray-200 text-gray-500 text-xs font-semibold uppercase tracking-wide leading-loose no-underline cursor-pointer transition duration-100;
 }
 .rw-button:hover {
   @apply bg-gray-500 text-white;
