@@ -7248,6 +7248,7 @@ __metadata:
   dependencies:
     "@redwoodjs/api": 2.0.0
     "@redwoodjs/graphql-server": 2.0.0
+    graphql-tag: ^2.12.6
   languageName: unknown
   linkType: soft
 
