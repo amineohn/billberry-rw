@@ -12,7 +12,7 @@ import { toast } from '@redwoodjs/web/toast'
 
 import MyEvent from 'src/components/Events'
 import { QUERY } from 'src/components/Task/TasksCell'
-
+import Alert from 'src/components/Alert'
 const DELETE_TASK_MUTATION = gql`
   mutation DeleteTaskMutation($id: Int!) {
     deleteTask(id: $id) {
@@ -235,7 +235,17 @@ const TasksList = ({ tasks }: Props) => {
   )
 
   const handleSelectEvent = useCallback((event) => {
-    navigate(routes.editTask({ id: event.id }))
+    return (
+      <Alert
+        title={'cc'}
+        content={<p className="text-sm text-gray-500"></p>}
+        buttonText={'cc2'}
+        type={'button'}
+        closeModal={() => false}
+        isOpen={true}
+      />
+    )
+    //navigate(routes.editTask({ id: event.id }))
   }, [])
   const resizeEvent = useCallback(
     ({ event, start, end }) => {
@@ -271,14 +281,11 @@ const TasksList = ({ tasks }: Props) => {
     []
   )
   const dayPropGetter = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (date) => ({
-      ...(moment(date).day() === 2 && {
+      /*...(moment(date).day() === 2 && {
         className: '!bg-yellow-500/50',
-      }),
-      ...(moment(date).day() === 4 && {
-        className: '!bg-purple-500/50 !text-white',
-        color: 'white',
-      }),
+      }),*/
     }),
     []
   )
@@ -289,7 +296,7 @@ const TasksList = ({ tasks }: Props) => {
     defaultDate: new Date(),
   }))
   return (
-    <div className="rw-segment rw-table-wrapper-responsive">
+    <div className="rw-table-wrapper-responsive space-y-2">
       <DnDCalendar
         localizer={localizer}
         the={true}
@@ -325,64 +332,67 @@ const TasksList = ({ tasks }: Props) => {
         components={components}
         popup={true}
       />
-      <table className="rw-table">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>Planned at</th>
-            <th>Worker id</th>
-            <th>Customer id</th>
-            <th>Site id</th>
-            <th>Container id</th>
-            <th>Material id</th>
-            <th>Service id</th>
-            <th>&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
-          {tasks.map((task) => (
-            <tr key={task.id}>
-              <td>{truncate(task.id)}</td>
-              <td>{timeTag(task.plannedAt)}</td>
-              <td>{truncate(task.workerId)}</td>
-              <td>{truncate(task.customerId)}</td>
-              <td>{truncate(task.siteId)}</td>
-              <td>{truncate(task.containerId)}</td>
-              <td>{truncate(task.materialId)}</td>
-              <td>{truncate(task.serviceId)}</td>
-              <td>{truncate(task.start)}</td>
-
-              <td>{truncate(task.end)}</td>
-              <td>
-                <nav className="rw-table-actions">
-                  <Link
-                    to={routes.task({ id: task.id })}
-                    title={'Show task ' + task.id + ' detail'}
-                    className="rw-button rw-button-small"
-                  >
-                    Show
-                  </Link>
-                  <Link
-                    to={routes.editTask({ id: task.id })}
-                    title={'Edit task ' + task.id}
-                    className="rw-button rw-button-small rw-button-blue"
-                  >
-                    Edit
-                  </Link>
-                  <button
-                    type="button"
-                    title={'Delete task ' + task.id}
-                    className="rw-button rw-button-small rw-button-red"
-                    onClick={() => onDeleteClick(task.id)}
-                  >
-                    Delete
-                  </button>
-                </nav>
-              </td>
+      <div className={'rw-segment '}>
+        <table className="rw-table">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Planned at</th>
+              <th>Worker id</th>
+              <th>Customer id</th>
+              <th>Site id</th>
+              <th>Container id</th>
+              <th>Material id</th>
+              <th>Service id</th>
+              <th>Start Time</th>
+              <th>End Time</th>
+              <th>&nbsp;</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {tasks.map((task) => (
+              <tr key={task.id}>
+                <td>{truncate(task.id)}</td>
+                <td>{timeTag(task.plannedAt)}</td>
+                <td>{truncate(task.workerId)}</td>
+                <td>{truncate(task.customerId)}</td>
+                <td>{truncate(task.siteId)}</td>
+                <td>{truncate(task.containerId)}</td>
+                <td>{truncate(task.materialId)}</td>
+                <td>{truncate(task.serviceId)}</td>
+                <td>{truncate(task.start)}</td>
+                <td>{truncate(task.end)}</td>
+                <td>
+                  <nav className="rw-table-actions">
+                    <Link
+                      to={routes.task({ id: task.id })}
+                      title={'Show task ' + task.id + ' detail'}
+                      className="rw-button rw-button-small"
+                    >
+                      Show
+                    </Link>
+                    <Link
+                      to={routes.editTask({ id: task.id })}
+                      title={'Edit task ' + task.id}
+                      className="rw-button rw-button-small rw-button-blue"
+                    >
+                      Edit
+                    </Link>
+                    <button
+                      type="button"
+                      title={'Delete task ' + task.id}
+                      className="rw-button rw-button-small rw-button-red"
+                      onClick={() => onDeleteClick(task.id)}
+                    >
+                      Delete
+                    </button>
+                  </nav>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   )
 }

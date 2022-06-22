@@ -1,5 +1,8 @@
 .rw-scaffold {
-  @apply bg-white text-gray-600;
+  @apply bg-white text-gray-600 max-w-7xl m-auto;
+}
+hr {
+  @apply max-w-7xl m-auto hidden;
 }
 .rw-scaffold h1,
 .rw-scaffold h2 {

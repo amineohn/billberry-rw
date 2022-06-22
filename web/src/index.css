@@ -14,7 +14,7 @@
 
 
 .rbc-calendar {
-  @apply box-border flex flex-col items-stretch h-full;
+  @apply box-border flex flex-col items-stretch h-screen;
 }
 
 .rbc-calendar *,
