@@ -8,39 +8,14 @@ import {
   Submit,
 } from '@redwoodjs/forms'
 
-
 const formatDatetime = (value) => {
   if (value) {
     return value.replace(/:\d{2}\.\d{3}\w/, '')
   }
 }
 
-
 const TaskForm = (props) => {
   const onSubmit = (data) => {
-
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
     props.onSave(data, props?.task?.id)
   }
 
@@ -53,7 +28,7 @@ const TaskForm = (props) => {
           titleClassName="rw-form-error-title"
           listClassName="rw-form-error-list"
         />
-      
+
         <Label
           name="plannedAt"
           className="rw-label"
@@ -61,17 +36,66 @@ const TaskForm = (props) => {
         >
           Planned at
         </Label>
-        
-          <DatetimeLocalField
-            name="plannedAt"
-            defaultValue={formatDatetime(props.task?.plannedAt)}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-        
+
+        <DatetimeLocalField
+          name="plannedAt"
+          defaultValue={formatDatetime(props.task?.plannedAt)}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="plannedAt" className="rw-field-error" />
+
+        <FormError
+          error={props.error}
+          wrapperClassName="rw-form-error-wrapper"
+          titleClassName="rw-form-error-title"
+          listClassName="rw-form-error-list"
+        />
+
+        <Label
+          name="start"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          Start
+        </Label>
+
+        <DatetimeLocalField
+          name="plannedAt"
+          defaultValue={formatDatetime(props.task?.start)}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
+
+        <FieldError name="start" className="rw-field-error" />
+
+        <FormError
+          error={props.error}
+          wrapperClassName="rw-form-error-wrapper"
+          titleClassName="rw-form-error-title"
+          listClassName="rw-form-error-list"
+        />
+
+        <Label
+          name="end"
+          className="rw-label"
+          errorClassName="rw-label rw-label-error"
+        >
+          end
+        </Label>
+
+        <DatetimeLocalField
+          name="plannedAt"
+          defaultValue={formatDatetime(props.task?.end)}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
+
+        <FieldError name="end" className="rw-field-error" />
 
         <Label
           name="workerId"
@@ -80,15 +104,14 @@ const TaskForm = (props) => {
         >
           Worker id
         </Label>
-        
-          <NumberField
-            name="workerId"
-            defaultValue={props.task?.workerId}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-        
+
+        <NumberField
+          name="workerId"
+          defaultValue={props.task?.workerId}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="workerId" className="rw-field-error" />
 
@@ -99,15 +122,14 @@ const TaskForm = (props) => {
         >
           Customer id
         </Label>
-        
-          <NumberField
-            name="customerId"
-            defaultValue={props.task?.customerId}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-        
+
+        <NumberField
+          name="customerId"
+          defaultValue={props.task?.customerId}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="customerId" className="rw-field-error" />
 
@@ -118,15 +140,14 @@ const TaskForm = (props) => {
         >
           Site id
         </Label>
-        
-          <NumberField
-            name="siteId"
-            defaultValue={props.task?.siteId}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-        
+
+        <NumberField
+          name="siteId"
+          defaultValue={props.task?.siteId}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="siteId" className="rw-field-error" />
 
@@ -137,15 +158,14 @@ const TaskForm = (props) => {
         >
           Container id
         </Label>
-        
-          <NumberField
-            name="containerId"
-            defaultValue={props.task?.containerId}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-        
+
+        <NumberField
+          name="containerId"
+          defaultValue={props.task?.containerId}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="containerId" className="rw-field-error" />
 
@@ -156,15 +176,14 @@ const TaskForm = (props) => {
         >
           Material id
         </Label>
-        
-          <NumberField
-            name="materialId"
-            defaultValue={props.task?.materialId}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-        
+
+        <NumberField
+          name="materialId"
+          defaultValue={props.task?.materialId}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="materialId" className="rw-field-error" />
 
@@ -175,23 +194,19 @@ const TaskForm = (props) => {
         >
           Service id
         </Label>
-        
-          <NumberField
-            name="serviceId"
-            defaultValue={props.task?.serviceId}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-        
+
+        <NumberField
+          name="serviceId"
+          defaultValue={props.task?.serviceId}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="serviceId" className="rw-field-error" />
 
         <div className="rw-button-group">
-          <Submit
-            disabled={props.loading}
-            className="rw-button rw-button-blue"
-          >
+          <Submit disabled={props.loading} className="rw-button rw-button-blue">
             Save
           </Submit>
         </div>

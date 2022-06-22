@@ -164,7 +164,7 @@ const TasksList = ({ tasks }: Props) => {
 
   const onDeleteClick = (id) => {
     if (confirm('Are you sure you want to delete task ' + id + '?')) {
-      deleteTask({ variables: { id } })
+      deleteTask({ variables: { id } }).then((r) => console.log(r))
     }
   }
   const [events, setEvents] = useState(lycos)
@@ -350,6 +350,9 @@ const TasksList = ({ tasks }: Props) => {
               <td>{truncate(task.containerId)}</td>
               <td>{truncate(task.materialId)}</td>
               <td>{truncate(task.serviceId)}</td>
+              <td>{truncate(task.start)}</td>
+
+              <td>{truncate(task.end)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link
