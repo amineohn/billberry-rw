@@ -2789,7 +2789,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@headlessui/react@npm:^1.6.5":
+"@headlessui/react@npm:latest":
   version: 1.6.5
   resolution: "@headlessui/react@npm:1.6.5"
   peerDependencies:
@@ -21184,7 +21184,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
-    "@headlessui/react": ^1.6.5
+    "@headlessui/react": latest
     "@heroicons/react": ^1.0.6
     "@redwoodjs/core": 2.0.0
     moment: ^2.29.3
