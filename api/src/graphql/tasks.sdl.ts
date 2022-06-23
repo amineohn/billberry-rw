@@ -14,6 +14,9 @@ export const schema = gql`
     materialId: Int!
     service: Service!
     serviceId: Int!
+    start: DateTime!
+    end: DateTime!
+    title: String!
   }
 
   type Query {

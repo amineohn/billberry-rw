@@ -29,17 +29,19 @@ export const Loading = () => <div>Loading...</div>
 export const Failure = ({ error }: CellFailureProps) => (
   <div className="rw-cell-error">{error.message}</div>
 )
-
 export const Success = ({ container }: CellSuccessProps<EditContainerById>) => {
-  const [updateContainer, { loading, error }] = useMutation(UPDATE_CONTAINER_MUTATION, {
-    onCompleted: () => {
-      toast.success('Container updated')
-      navigate(routes.containers())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
+  const [updateContainer, { loading, error }] = useMutation(
+    UPDATE_CONTAINER_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Container updated')
+        navigate(routes.containers())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
 
   const onSave = (input, id) => {
     updateContainer({ variables: { id, input } })
@@ -48,10 +50,17 @@ export const Success = ({ container }: CellSuccessProps<EditContainerById>) => {
   return (
     <div className="rw-segment">
       <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">Edit Container {container.id}</h2>
+        <h2 className="rw-heading rw-heading-secondary">
+          Edit Container {container.id}
+        </h2>
       </header>
       <div className="rw-segment-main">
-        <ContainerForm container={container} onSave={onSave} error={error} loading={loading} />
+        <ContainerForm
+          container={container}
+          onSave={onSave}
+          error={error}
+          loading={loading}
+        />
       </div>
     </div>
   )

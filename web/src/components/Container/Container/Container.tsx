@@ -44,8 +44,13 @@ const timeTag = (datetime) => {
 const checkboxInputTag = (checked) => {
   return <input type="checkbox" checked={checked} disabled />
 }
-
-const Container = ({ container }) => {
+interface Props {
+  container: {
+    id: number
+    name: string
+  }
+}
+const Container = ({ container }: Props) => {
   const [deleteContainer] = useMutation(DELETE_CONTAINER_MUTATION, {
     onCompleted: () => {
       toast.success('Container deleted')
@@ -66,14 +71,17 @@ const Container = ({ container }) => {
     <>
       <div className="rw-segment">
         <header className="rw-segment-header">
-          <h2 className="rw-heading rw-heading-secondary">Container {container.id} Detail</h2>
+          <h2 className="rw-heading rw-heading-secondary">
+            Container {container.id} Detail
+          </h2>
         </header>
         <table className="rw-table">
           <tbody>
             <tr>
               <th>Id</th>
               <td>{container.id}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Name</th>
               <td>{container.name}</td>
             </tr>

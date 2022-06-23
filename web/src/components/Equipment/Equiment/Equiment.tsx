@@ -73,7 +73,10 @@ const EquimentList = ({ equiment }) => {
       deleteEquipment({ variables: { id } })
     }
   }
-
+  interface Props {
+    id: number
+    name: string
+  }
   return (
     <div className="rw-segment rw-table-wrapper-responsive">
       <table className="rw-table">
@@ -85,7 +88,7 @@ const EquimentList = ({ equiment }) => {
           </tr>
         </thead>
         <tbody>
-          {equiment.map((equipment) => (
+          {equiment.map((equipment: Props) => (
             <tr key={equipment.id}>
               <td>{truncate(equipment.id)}</td>
               <td>{truncate(equipment.name)}</td>

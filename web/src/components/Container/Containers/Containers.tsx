@@ -5,6 +5,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Container/ContainersCell'
+import { RWGqlError } from '../../../../interfaces'
 
 const DELETE_CONTAINER_MUTATION = gql`
   mutation DeleteContainerMutation($id: Int!) {
@@ -52,7 +53,10 @@ const timeTag = (datetime) => {
 const checkboxInputTag = (checked) => {
   return <input type="checkbox" checked={checked} disabled />
 }
-
+interface Props {
+  id: number
+  name: string
+}
 const ContainersList = ({ containers }) => {
   const [deleteContainer] = useMutation(DELETE_CONTAINER_MUTATION, {
     onCompleted: () => {
@@ -85,7 +89,7 @@ const ContainersList = ({ containers }) => {
           </tr>
         </thead>
         <tbody>
-          {containers.map((container) => (
+          {containers.map((container: Props) => (
             <tr key={container.id}>
               <td>{truncate(container.id)}</td>
               <td>{truncate(container.name)}</td>

@@ -6,16 +6,19 @@ import {
   TextField,
   Submit,
 } from '@redwoodjs/forms'
+import { RWGqlError } from '../../../../interfaces'
 
-
-
-const CustomerForm = (props) => {
+interface Props {
+  error: RWGqlError | null
+  onSave: (data, id) => void
+  customer: {
+    id: number
+    name: string
+  }
+  loading: boolean
+}
+const CustomerForm = (props: Props) => {
   const onSubmit = (data) => {
-
-  
-    
-    
-  
     props.onSave(data, props?.customer?.id)
   }
 
@@ -28,7 +31,7 @@ const CustomerForm = (props) => {
           titleClassName="rw-form-error-title"
           listClassName="rw-form-error-list"
         />
-      
+
         <Label
           name="name"
           className="rw-label"
@@ -36,23 +39,19 @@ const CustomerForm = (props) => {
         >
           Name
         </Label>
-        
-          <TextField
-            name="name"
-            defaultValue={props.customer?.name}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-        
+
+        <TextField
+          name="name"
+          defaultValue={props.customer?.name}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="name" className="rw-field-error" />
 
         <div className="rw-button-group">
-          <Submit
-            disabled={props.loading}
-            className="rw-button rw-button-blue"
-          >
+          <Submit disabled={props.loading} className="rw-button rw-button-blue">
             Save
           </Submit>
         </div>

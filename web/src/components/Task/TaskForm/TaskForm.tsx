@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 import {
   Form,
   FormError,
@@ -10,6 +8,8 @@ import {
   Submit,
 } from '@redwoodjs/forms'
 
+import { RWGqlError } from '../../../../interfaces'
+
 //import Combo from 'src/components/Combobox'
 
 const formatDatetime = (value) => {
@@ -17,8 +17,25 @@ const formatDatetime = (value) => {
     return value.replace(/:\d{2}\.\d{3}\w/, '')
   }
 }
-
-const TaskForm = (props) => {
+interface Props {
+  error: RWGqlError | null
+  onSave: (data, id) => void
+  task: {
+    id: number
+    start: string
+    end: string
+    plannedAt: string
+    workerId: number
+    customerId: number
+    siteId: number
+    containerId: number
+    materialId: number
+    serviceId: number
+    title: string
+  }
+  loading: boolean
+}
+const TaskForm = (props: Props) => {
   const onSubmit = (data) => {
     props.onSave(data, props?.task?.id)
   }
@@ -31,7 +48,7 @@ const TaskForm = (props) => {
     { id: 5, name: 'Katelyn Rohan', unavailable: false },
   ]
   const [query, setQuery] = useState('')*/
-  console.log(props)
+
   return (
     <div className="rw-form-wrapper">
       <Form onSubmit={onSubmit} error={props.error}>
