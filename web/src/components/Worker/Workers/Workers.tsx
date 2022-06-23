@@ -5,6 +5,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Worker/WorkersCell'
+import { RWGqlError } from '../../../../interfaces'
 
 const DELETE_WORKER_MUTATION = gql`
   mutation DeleteWorkerMutation($id: Int!) {
@@ -52,7 +53,15 @@ const timeTag = (datetime) => {
 const checkboxInputTag = (checked) => {
   return <input type="checkbox" checked={checked} disabled />
 }
+interface Props {
+  error: RWGqlError | null
+  onSave: (data, id) => void
 
+  name: string
+  id: number
+
+  loading: boolean
+}
 const WorkersList = ({ workers }) => {
   const [deleteWorker] = useMutation(DELETE_WORKER_MUTATION, {
     onCompleted: () => {
@@ -85,7 +94,7 @@ const WorkersList = ({ workers }) => {
           </tr>
         </thead>
         <tbody>
-          {workers.map((worker) => (
+          {workers.map((worker: Props) => (
             <tr key={worker.id}>
               <td>{truncate(worker.id)}</td>
               <td>{truncate(worker.name)}</td>

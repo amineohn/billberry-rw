@@ -3,6 +3,7 @@ import humanize from 'humanize-string'
 import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
+import { RWGqlError } from '../../../../interfaces'
 
 const DELETE_SITE_MUTATION = gql`
   mutation DeleteSiteMutation($id: Int!) {
@@ -44,8 +45,16 @@ const timeTag = (datetime) => {
 const checkboxInputTag = (checked) => {
   return <input type="checkbox" checked={checked} disabled />
 }
-
-const Site = ({ site }) => {
+interface Props {
+  error: RWGqlError | null
+  onSave: (data, id) => void
+  site: {
+    id: number
+    name: string
+  }
+  loading: boolean
+}
+const Site = ({ site }: Props) => {
   const [deleteSite] = useMutation(DELETE_SITE_MUTATION, {
     onCompleted: () => {
       toast.success('Site deleted')
@@ -66,14 +75,17 @@ const Site = ({ site }) => {
     <>
       <div className="rw-segment">
         <header className="rw-segment-header">
-          <h2 className="rw-heading rw-heading-secondary">Site {site.id} Detail</h2>
+          <h2 className="rw-heading rw-heading-secondary">
+            Site {site.id} Detail
+          </h2>
         </header>
         <table className="rw-table">
           <tbody>
             <tr>
               <th>Id</th>
               <td>{site.id}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Name</th>
               <td>{site.name}</td>
             </tr>

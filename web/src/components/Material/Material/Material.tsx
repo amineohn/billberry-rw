@@ -3,6 +3,7 @@ import humanize from 'humanize-string'
 import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
+import { RWGqlError } from '../../../../interfaces'
 
 const DELETE_MATERIAL_MUTATION = gql`
   mutation DeleteMaterialMutation($id: Int!) {
@@ -44,8 +45,16 @@ const timeTag = (datetime) => {
 const checkboxInputTag = (checked) => {
   return <input type="checkbox" checked={checked} disabled />
 }
-
-const Material = ({ material }) => {
+interface Props {
+  error: RWGqlError | null
+  onSave: (data, id) => void
+  material: {
+    id: number
+    name: string
+  }
+  loading: boolean
+}
+const Material = ({ material }: Props) => {
   const [deleteMaterial] = useMutation(DELETE_MATERIAL_MUTATION, {
     onCompleted: () => {
       toast.success('Material deleted')
@@ -66,14 +75,17 @@ const Material = ({ material }) => {
     <>
       <div className="rw-segment">
         <header className="rw-segment-header">
-          <h2 className="rw-heading rw-heading-secondary">Material {material.id} Detail</h2>
+          <h2 className="rw-heading rw-heading-secondary">
+            Material {material.id} Detail
+          </h2>
         </header>
         <table className="rw-table">
           <tbody>
             <tr>
               <th>Id</th>
               <td>{material.id}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Name</th>
               <td>{material.name}</td>
             </tr>

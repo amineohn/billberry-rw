@@ -4,6 +4,8 @@ import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import { RWGqlError } from '../../../../interfaces'
+
 const DELETE_TASK_MUTATION = gql`
   mutation DeleteTaskMutation($id: Int!) {
     deleteTask(id: $id) {
@@ -44,8 +46,22 @@ const timeTag = (datetime) => {
 const checkboxInputTag = (checked) => {
   return <input type="checkbox" checked={checked} disabled />
 }
-
-const Task = ({ task }) => {
+interface Props {
+  error: RWGqlError | null
+  onSave: (data, id) => void
+  task: {
+    workerId: number
+    customerId: number
+    siteId: number
+    containerId: number
+    materialId: number
+    serviceId: number
+    plannedAt: string
+    id: number
+  }
+  loading: boolean
+}
+const Task = ({ task }: Props) => {
   const [deleteTask] = useMutation(DELETE_TASK_MUTATION, {
     onCompleted: () => {
       toast.success('Task deleted')
@@ -66,32 +82,41 @@ const Task = ({ task }) => {
     <>
       <div className="rw-segment">
         <header className="rw-segment-header">
-          <h2 className="rw-heading rw-heading-secondary">Task {task.id} Detail</h2>
+          <h2 className="rw-heading rw-heading-secondary">
+            Task {task.id} Detail
+          </h2>
         </header>
         <table className="rw-table">
           <tbody>
             <tr>
               <th>Id</th>
               <td>{task.id}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Planned at</th>
               <td>{timeTag(task.plannedAt)}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Worker id</th>
               <td>{task.workerId}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Customer id</th>
               <td>{task.customerId}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Site id</th>
               <td>{task.siteId}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Container id</th>
               <td>{task.containerId}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Material id</th>
               <td>{task.materialId}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Service id</th>
               <td>{task.serviceId}</td>
             </tr>

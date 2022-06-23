@@ -5,6 +5,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Material/MaterialsCell'
+import { RWGqlError } from '../../../../interfaces'
 
 const DELETE_MATERIAL_MUTATION = gql`
   mutation DeleteMaterialMutation($id: Int!) {
@@ -53,6 +54,11 @@ const checkboxInputTag = (checked) => {
   return <input type="checkbox" checked={checked} disabled />
 }
 
+interface Props {
+  id: number
+  name: string
+}
+
 const MaterialsList = ({ materials }) => {
   const [deleteMaterial] = useMutation(DELETE_MATERIAL_MUTATION, {
     onCompleted: () => {
@@ -85,7 +91,7 @@ const MaterialsList = ({ materials }) => {
           </tr>
         </thead>
         <tbody>
-          {materials.map((material) => (
+          {materials.map((material: Props) => (
             <tr key={material.id}>
               <td>{truncate(material.id)}</td>
               <td>{truncate(material.name)}</td>

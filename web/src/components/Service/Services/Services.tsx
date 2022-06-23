@@ -5,6 +5,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Service/ServicesCell'
+import { RWGqlError } from '../../../../interfaces'
 
 const DELETE_SERVICE_MUTATION = gql`
   mutation DeleteServiceMutation($id: Int!) {
@@ -52,7 +53,14 @@ const timeTag = (datetime) => {
 const checkboxInputTag = (checked) => {
   return <input type="checkbox" checked={checked} disabled />
 }
+interface Props {
+  error: RWGqlError | null
+  onSave: (data, id) => void
+  id: number
+  name: string
 
+  loading: boolean
+}
 const ServicesList = ({ services }) => {
   const [deleteService] = useMutation(DELETE_SERVICE_MUTATION, {
     onCompleted: () => {
@@ -85,7 +93,7 @@ const ServicesList = ({ services }) => {
           </tr>
         </thead>
         <tbody>
-          {services.map((service) => (
+          {services.map((service: Props) => (
             <tr key={service.id}>
               <td>{truncate(service.id)}</td>
               <td>{truncate(service.name)}</td>

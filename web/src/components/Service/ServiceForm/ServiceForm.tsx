@@ -6,16 +6,19 @@ import {
   TextField,
   Submit,
 } from '@redwoodjs/forms'
+import { RWGqlError } from '../../../../interfaces'
 
-
-
-const ServiceForm = (props) => {
+interface Props {
+  error: RWGqlError | null
+  onSave: (data, id) => void
+  service: {
+    id: number
+    name: string
+  }
+  loading: boolean
+}
+const ServiceForm = (props: Props) => {
   const onSubmit = (data) => {
-
-  
-    
-    
-  
     props.onSave(data, props?.service?.id)
   }
 
@@ -28,7 +31,7 @@ const ServiceForm = (props) => {
           titleClassName="rw-form-error-title"
           listClassName="rw-form-error-list"
         />
-      
+
         <Label
           name="name"
           className="rw-label"
@@ -36,23 +39,19 @@ const ServiceForm = (props) => {
         >
           Name
         </Label>
-        
-          <TextField
-            name="name"
-            defaultValue={props.service?.name}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-        
+
+        <TextField
+          name="name"
+          defaultValue={props.service?.name}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="name" className="rw-field-error" />
 
         <div className="rw-button-group">
-          <Submit
-            disabled={props.loading}
-            className="rw-button rw-button-blue"
-          >
+          <Submit disabled={props.loading} className="rw-button rw-button-blue">
             Save
           </Submit>
         </div>
