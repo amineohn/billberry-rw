@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import {
   Form,
   FormError,
@@ -7,6 +9,8 @@ import {
   NumberField,
   Submit,
 } from '@redwoodjs/forms'
+
+//import Combo from 'src/components/Combobox'
 
 const formatDatetime = (value) => {
   if (value) {
@@ -18,7 +22,16 @@ const TaskForm = (props) => {
   const onSubmit = (data) => {
     props.onSave(data, props?.task?.id)
   }
-
+  /*
+  const data = [
+    { id: 1, name: 'Durward Reynolds', unavailable: false },
+    { id: 2, name: 'Kenton Towne', unavailable: false },
+    { id: 3, name: 'Therese Wunsch', unavailable: false },
+    { id: 4, name: 'Benedict Kessler', unavailable: true },
+    { id: 5, name: 'Katelyn Rohan', unavailable: false },
+  ]
+  const [query, setQuery] = useState('')*/
+  console.log(props)
   return (
     <div className="rw-form-wrapper">
       <Form onSubmit={onSubmit} error={props.error}>
@@ -104,7 +117,13 @@ const TaskForm = (props) => {
         >
           Worker id
         </Label>
-
+        {/*
+          <Combo
+            data={data as any}
+            query={query}
+            onChange={(event) => setQuery(event.target.value)}
+            setQuery={() => setQuery('')}
+          /> */}
         <NumberField
           name="workerId"
           defaultValue={props.task?.workerId}

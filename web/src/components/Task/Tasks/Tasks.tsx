@@ -10,9 +10,9 @@ import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import Alert from 'src/components/Alert'
 import MyEvent from 'src/components/Events'
 import { QUERY } from 'src/components/Task/TasksCell'
-import Alert from 'src/components/Alert'
 const DELETE_TASK_MUTATION = gql`
   mutation DeleteTaskMutation($id: Int!) {
     deleteTask(id: $id) {

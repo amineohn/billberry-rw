@@ -64,10 +64,13 @@ model Task {
   siteId      Int
   container   Container @relation(fields: [containerId], references: [id])
   containerId Int
-  material    Material @relation(fields: [materialId], references: [id])
+  material    Material  @relation(fields: [materialId], references: [id])
   materialId  Int
   service     Service   @relation(fields: [serviceId], references: [id])
   serviceId   Int
+  start       DateTime  @default(now())
+  end         DateTime  @default(now())
+  title       String    @default("")
 }
 
 
