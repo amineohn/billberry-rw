@@ -18,6 +18,9 @@ export const QUERY = gql`
       containerId
       materialId
       serviceId
+      title
+      start
+      end
     }
   }
 `
@@ -32,6 +35,9 @@ const UPDATE_TASK_MUTATION = gql`
       containerId
       materialId
       serviceId
+      title
+      start
+      end
     }
   }
 `
@@ -52,15 +58,32 @@ export const Success = ({ task }: CellSuccessProps<EditTaskById>) => {
       toast.error(error.message)
     },
   })
-
-  const onSave = (input, id) => {
+  const parseDateTime = (value: any): Date => {
+    if (value) {
+      return value.replace(/:\d{2}\.\d{3}\w/, '')
+    }
+  }
+  interface Data {
+    workerId: number
+    customerId: number
+    siteId: number
+    containerId: number
+    materialId: number
+    serviceId: number
+    title: string
+    start: string
+    end: string
+  }
+  const onSave = (input: Data, id) => {
     const castInput = Object.assign(input, {
-      workerId: parseInt(input.workerId),
-      customerId: parseInt(input.customerId),
-      siteId: parseInt(input.siteId),
-      containerId: parseInt(input.containerId),
-      materialId: parseInt(input.materialId),
-      serviceId: parseInt(input.serviceId),
+      workerId: input.workerId,
+      customerId: input.customerId,
+      siteId: input.siteId,
+      containerId: input.containerId,
+      materialId: input.materialId,
+      serviceId: input.serviceId,
+      start: parseDateTime(input.start),
+      end: parseDateTime(input.end),
     })
     updateTask({ variables: { id, input: castInput } }).then((r) =>
       console.log(r)

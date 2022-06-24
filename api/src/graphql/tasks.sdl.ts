@@ -32,6 +32,9 @@ export const schema = gql`
     containerId: Int!
     materialId: Int!
     serviceId: Int!
+    start: DateTime
+    end: DateTime
+    title: String
   }
 
   input UpdateTaskInput {
@@ -42,6 +45,9 @@ export const schema = gql`
     containerId: Int
     materialId: Int
     serviceId: Int
+    start: DateTime
+    end: DateTime
+    title: String
   }
 
   type Mutation {

@@ -20,7 +20,6 @@ const DELETE_TASK_MUTATION = gql`
     }
   }
 `
-
 const MAX_STRING_LENGTH = 150
 
 const truncate = (text) => {
@@ -31,15 +30,6 @@ const truncate = (text) => {
   return output
 }
 
-const timeTag = (datetime) => {
-  return (
-    datetime && (
-      <time dateTime={datetime} title={datetime}>
-        {new Date(datetime).toUTCString()}
-      </time>
-    )
-  )
-}
 const formatDate = (startTimed) => {
   const time = new Date(startTimed)
   const date = new Date(time.setHours(time.getHours()))
@@ -110,21 +100,24 @@ const TasksList = ({ tasks }: Props) => {
     }
   `
 
-  const localizer = momentLocalizer(moment)
+  const localize = momentLocalizer(moment)
   const DnDCalendar = withDragAndDrop(Calendar)
   const [updateTask] = useMutation(UPDATE_TASK_MUTATION, {
     onCompleted: () => {
       toast.success('Task updated')
       navigate(routes.tasks())
     },
-    onQueryUpdated: () => {},
+    //onQueryUpdated: () => {},
     onError: (error) => {
       toast.error(error.message)
     },
     refetchQueries: [{ query: EDIT_TASK_QUERY }],
     awaitRefetchQueries: true,
   })
-  const onSave = (input, id) => {
+  const onSave = (
+    input: { id: number; start: Date; end: Date },
+    id: number
+  ) => {
     const castInput = Object.assign(input, {
       id: input.id,
       start: formatDate(input.start),
@@ -134,6 +127,7 @@ const TasksList = ({ tasks }: Props) => {
       console.log(r)
     )
   }
+
   const lycos = tasks.map((task) => {
     return {
       id: task.id,
@@ -262,6 +256,21 @@ const TasksList = ({ tasks }: Props) => {
     },
     [setEvents]
   )
+  const timeTag = (datetime) => {
+    const date = new Date(datetime)
+    const day = date.toLocaleDateString()
+    const month = date.toLocaleString('default', {
+      month: 'short',
+    })
+    const year = date.getFullYear()
+    return (
+      datetime && (
+        <time dateTime={datetime} title={datetime}>
+          {day + ' ' + month + ' ' + year}
+        </time>
+      )
+    )
+  }
   const eventPropGetter = useCallback(
     (event, start, end, isSelected) => ({
       ...(isSelected && {
@@ -283,7 +292,7 @@ const TasksList = ({ tasks }: Props) => {
   )
   const dayPropGetter = useCallback(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    (date) => ({
+    (date: Date) => ({
       /*...(moment(date).day() === 2 && {
         className: '!bg-yellow-500/50',
       }),*/
@@ -299,7 +308,7 @@ const TasksList = ({ tasks }: Props) => {
   return (
     <div className="rw-table-wrapper-responsive space-y-2">
       <DnDCalendar
-        localizer={localizer}
+        localizer={localize}
         the={true}
         events={events}
         startAccessor="start"
@@ -361,8 +370,8 @@ const TasksList = ({ tasks }: Props) => {
                 <td>{truncate(task.containerId)}</td>
                 <td>{truncate(task.materialId)}</td>
                 <td>{truncate(task.serviceId)}</td>
-                <td>{truncate(task.start)}</td>
-                <td>{truncate(task.end)}</td>
+                <td>{timeTag(task.start)}</td>
+                <td>{timeTag(task.end)}</td>
                 <td>
                   <nav className="rw-table-actions">
                     <Link

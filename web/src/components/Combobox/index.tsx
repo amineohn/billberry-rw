@@ -7,6 +7,8 @@ interface Props {
   query: string
   onChange: any
   setQuery: (query: string) => void
+  placeholder?: string
+  value?: string
 }
 interface Data {
   id: number
@@ -60,16 +62,16 @@ const Combo = ({ data, query, onChange, setQuery }: Props) => {
                   Nothing found.
                 </div>
               ) : (
-                filtered.map((person: any) => {
+                filtered.map((data: any) => {
                   return (
                     <Combobox.Option
-                      key={person.id}
+                      key={data.id}
                       className={({ active }) =>
                         `relative cursor-default select-none py-2 pl-10 pr-4 ${
                           active ? 'bg-teal-600 text-white' : 'text-gray-900'
                         }`
                       }
-                      value={person}
+                      value={data}
                     >
                       {({ selected, active }) => (
                         <>
@@ -78,7 +80,7 @@ const Combo = ({ data, query, onChange, setQuery }: Props) => {
                               selected ? 'font-medium' : 'font-normal'
                             }`}
                           >
-                            {person.name}
+                            {data.name}
                           </span>
                           {selected ? (
                             <span
