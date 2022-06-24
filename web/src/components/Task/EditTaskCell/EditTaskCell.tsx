@@ -54,8 +54,17 @@ export const Success = ({ task }: CellSuccessProps<EditTaskById>) => {
   })
 
   const onSave = (input, id) => {
-    const castInput = Object.assign(input, { workerId: parseInt(input.workerId), customerId: parseInt(input.customerId), siteId: parseInt(input.siteId), containerId: parseInt(input.containerId), materialId: parseInt(input.materialId), serviceId: parseInt(input.serviceId), })
-    updateTask({ variables: { id, input: castInput } })
+    const castInput = Object.assign(input, {
+      workerId: parseInt(input.workerId),
+      customerId: parseInt(input.customerId),
+      siteId: parseInt(input.siteId),
+      containerId: parseInt(input.containerId),
+      materialId: parseInt(input.materialId),
+      serviceId: parseInt(input.serviceId),
+    })
+    updateTask({ variables: { id, input: castInput } }).then((r) =>
+      console.log(r)
+    )
   }
 
   return (
