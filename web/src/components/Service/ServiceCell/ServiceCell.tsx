@@ -22,5 +22,12 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ service }: CellSuccessProps<FindServiceById>) => {
-  return <Service service={service} />
+  return (
+    <Service
+      service={service}
+      error={undefined}
+      onSave={() => {}}
+      loading={false}
+    />
+  )
 }

@@ -13,15 +13,18 @@ const CREATE_EQUIPMENT_MUTATION = gql`
 `
 
 const NewEquipment = () => {
-  const [createEquipment, { loading, error }] = useMutation(CREATE_EQUIPMENT_MUTATION, {
-    onCompleted: () => {
-      toast.success('Equipment created')
-      navigate(routes.equiment())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
+  const [createEquipment, { loading, error }] = useMutation(
+    CREATE_EQUIPMENT_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Equipment created')
+        navigate(routes.equiment())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
 
   const onSave = (input) => {
     createEquipment({ variables: { input } })

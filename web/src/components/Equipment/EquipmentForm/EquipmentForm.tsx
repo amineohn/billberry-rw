@@ -10,8 +10,8 @@ import { RWGqlError } from '../../../../interfaces'
 
 interface Props {
   error: RWGqlError | null
-  onSave: (data, id) => void
-  equipment: {
+  onSave?: (data, id) => void
+  equipment?: {
     id: number
     name: string
   }

@@ -20,20 +20,20 @@ const formatDatetime = (value) => {
 interface Props {
   error: RWGqlError | null
   onSave: (data, id) => void
-  task: {
-    id: number
-    start: string
-    end: string
-    plannedAt: string
-    workerId: number
-    customerId: number
-    siteId: number
-    containerId: number
-    materialId: number
-    serviceId: number
-    title: string
+  task?: {
+    id?: number
+    start?: string
+    end?: string
+    plannedAt?: string
+    workerId?: number
+    customerId?: number
+    siteId?: number
+    containerId?: number
+    materialId?: number
+    serviceId?: number
+    title?: string
   }
-  loading: boolean
+  loading?: boolean
 }
 const TaskForm = (props: Props) => {
   const onSubmit = (data) => {
