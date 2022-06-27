@@ -10,10 +10,6 @@ interface Props {
   placeholder?: string
   value?: string
 }
-interface dProps {
-  id: number
-  name: string
-}
 interface Data {
   id: number
   value: string
