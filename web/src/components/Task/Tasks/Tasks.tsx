@@ -305,6 +305,30 @@ const TasksList = ({ tasks }: Props) => {
     event: MyEvent,
     defaultDate: new Date(),
   }))
+
+  const convertedDay = (dateTime, times: any) => {
+    const date = new Date(dateTime)
+    const time = times
+      ? date.getDay() +
+        '/' +
+        date.getMonth() +
+        '/' +
+        date.getFullYear() +
+        ' à ' +
+        date.getHours() +
+        ':' +
+        date.getMinutes()
+      : date.getDay() +
+        '/' +
+        date.getMonth() +
+        '/' +
+        date.getFullYear() +
+        ' de ' +
+        date.getHours() +
+        ':' +
+        date.getMinutes()
+    return time
+  }
   return (
     <div className="rw-table-wrapper-responsive space-y-2">
       <DnDCalendar
@@ -370,8 +394,8 @@ const TasksList = ({ tasks }: Props) => {
                 <td>{truncate(task.containerId)}</td>
                 <td>{truncate(task.materialId)}</td>
                 <td>{truncate(task.serviceId)}</td>
-                <td>{timeTag(task.start)}</td>
-                <td>{timeTag(task.end)}</td>
+                <td>{convertedDay(task.start, false)}</td>
+                <td>{convertedDay(task.end, false)}</td>
                 <td>
                   <nav className="rw-table-actions">
                     <Link
