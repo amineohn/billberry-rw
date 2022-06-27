@@ -142,6 +142,7 @@ const TasksList = ({ tasks }: Props) => {
       end: formatDate(task.end),
     }
   })
+  console.log(lycos)
   const [deleteTask] = useMutation(DELETE_TASK_MUTATION, {
     onCompleted: () => {
       toast.success('Task deleted')
@@ -271,6 +272,7 @@ const TasksList = ({ tasks }: Props) => {
       )
     )
   }
+
   const eventPropGetter = useCallback(
     (event, start, end, isSelected) => ({
       ...(isSelected && {

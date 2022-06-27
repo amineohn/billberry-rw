@@ -5,7 +5,7 @@ import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 interface Props {
   data: string[]
   query: string
-  onChange: any
+  onChange: () => void
   setQuery: (query: string) => void
   placeholder?: string
   value?: string
