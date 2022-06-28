@@ -12,7 +12,6 @@ import { toast } from '@redwoodjs/web/toast'
 
 import { EDIT_TASK_QUERY } from 'src/components/Task/Tasks/Tasks'
 
-import Alert from '../Alert'
 import MyEvent from '../Events'
 interface Props {
   tasks: [
@@ -50,8 +49,8 @@ interface Props {
   ]
 }
 const Calenda = ({ tasks }: Props) => {
-  const formatDate = (startTimed) => {
-    const time = new Date(startTimed)
+  const formatDate = (startTime: string) => {
+    const time = new Date(startTime)
     const date = new Date(time.setHours(time.getHours()))
     return date
   }
@@ -76,6 +75,7 @@ const Calenda = ({ tasks }: Props) => {
     refetchQueries: [{ query: EDIT_TASK_QUERY }],
     awaitRefetchQueries: true,
   })
+  //console.log(data.data?.task)
   const localize = momentLocalizer(moment)
   const DnDCalendar = withDragAndDrop(Calendar)
   const onSave = (
@@ -91,7 +91,7 @@ const Calenda = ({ tasks }: Props) => {
       console.log(r)
     )
   }
-
+  // fonctionne bien avec des données en dur mais pas avec les données de la base
   const lycos = tasks.map((task) => {
     return {
       id: task.id,
@@ -102,8 +102,8 @@ const Calenda = ({ tasks }: Props) => {
       containerName: task.container?.name,
       materialName: task.material?.name,
       workerName: task.worker?.name,
-      start: formatDate(task.start),
-      end: formatDate(task.end),
+      start: task.start,
+      end: task.end,
     }
   })
   const [events, setEvents] = useState(lycos)
@@ -148,7 +148,7 @@ const Calenda = ({ tasks }: Props) => {
       return [...prev]
     })
   }, [setEvents])
-  const formatName = (name, count) => `${name} ID ${count}`
+  const formatName = (name: string, count) => `${name} ID ${count}`
 
   const onDropFromOutside = useCallback(
     ({ start, end, allDay: isAllDay }) => {
@@ -175,17 +175,7 @@ const Calenda = ({ tasks }: Props) => {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleSelectEvent = useCallback((event) => {
-    return (
-      <Alert
-        title={'cc'}
-        content={<p className="text-sm text-gray-500"></p>}
-        buttonText={'cc2'}
-        type={'button'}
-        closeModal={() => false}
-        isOpen={true}
-      />
-    )
-    //navigate(routes.editTask({ id: event.id }))
+    navigate(routes.editTask({ id: event.id }))
   }, [])
 
   const resizeEvent = useCallback(
@@ -208,15 +198,6 @@ const Calenda = ({ tasks }: Props) => {
         style: {
           className: '!bg-red-500',
         },
-      }),
-      ...(moment(start).hour() < 12 && {
-        className: '!bg-blue-500',
-      }),
-      ...(event.title.includes('hey') && {
-        className: '!bg-green-500',
-      }),
-      ...(event.title.includes('bdx1') && {
-        className: '!bg-purple-500',
       }),
     }),
     []
@@ -261,6 +242,7 @@ const Calenda = ({ tasks }: Props) => {
           month: 'Mois',
           week: 'Semaine',
           day: 'Jour',
+          showColors: 'Afficher les couleurs',
           showMore: (total) => `${total} tâches`,
           showMoreTooltip: (total) => `+${total} tâches`,
           prev: <ArrowLeftIcon className="w-5 h-5" />,

@@ -28,5 +28,7 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ task }: CellSuccessProps<FindTaskById>) => {
-  return <Task task={task} />
+  return (
+    <Task task={task} error={undefined} onSave={() => null} loading={false} />
+  )
 }

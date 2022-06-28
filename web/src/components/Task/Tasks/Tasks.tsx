@@ -58,6 +58,40 @@ interface Props {
     }
   ]
 }
+export const GET_ALL_TABLE_DATA = gql`
+  query GetAllTableData {
+    tasks {
+      id
+      plannedAt
+      workerId
+      customerId
+      siteId
+      containerId
+      serviceId
+      materialId
+      worker {
+        name
+      }
+      customer {
+        name
+      }
+      site {
+        name
+      }
+      service {
+        name
+      }
+      container {
+        name
+      }
+      material {
+        name
+      }
+      start
+      end
+    }
+  }
+`
 export const EDIT_TASK_QUERY = gql`
   query EditTaskById($id: Int!) {
     task: task(id: $id) {
@@ -77,7 +111,6 @@ export const EDIT_TASK_QUERY = gql`
 `
 const TasksList = ({ tasks }: Props) => {
   moment.locale('fr')
-
   const [deleteTask] = useMutation(DELETE_TASK_MUTATION, {
     onCompleted: () => {
       toast.success('Task deleted')
@@ -91,13 +124,13 @@ const TasksList = ({ tasks }: Props) => {
     refetchQueries: [{ query: QUERY }],
     awaitRefetchQueries: true,
   })
-
-  const onDeleteClick = (id) => {
+  const onDeleteClick = (id: number) => {
     if (confirm('Are you sure you want to delete task ' + id + '?')) {
       deleteTask({ variables: { id } }).then((r) => console.log(r))
     }
   }
-  const timeTag = (datetime) => {
+
+  const timeTag = (datetime: string) => {
     const date = new Date(datetime)
     const day = date.toLocaleDateString()
     const month = date.toLocaleString('default', {
