@@ -50,7 +50,7 @@ model Worker {
 model Equipment {
   id    Int      @id @default(autoincrement())
   name  String
-//  tasks Task[]
+  //tasks Task[]
 }
 
 model Task {

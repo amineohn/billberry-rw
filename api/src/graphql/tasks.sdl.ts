@@ -38,6 +38,7 @@ export const schema = gql`
   }
 
   input UpdateTaskInput {
+    id: Int!
     plannedAt: DateTime
     workerId: Int
     customerId: Int

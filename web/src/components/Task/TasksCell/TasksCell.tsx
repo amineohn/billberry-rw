@@ -16,6 +16,27 @@ export const QUERY = gql`
       containerId
       materialId
       serviceId
+      start
+      end
+      worker {
+        name
+      }
+      customer {
+        name
+      }
+      site {
+        name
+      }
+      service {
+        name
+      }
+      container {
+        name
+      }
+      material {
+        name
+      }
+      title
     }
   }
 `
@@ -26,10 +47,7 @@ export const Empty = () => {
   return (
     <div className="rw-text-center">
       {'No tasks yet. '}
-      <Link
-        to={routes.newTask()}
-        className="rw-link"
-      >
+      <Link to={routes.newTask()} className="rw-link">
         {'Create one?'}
       </Link>
     </div>

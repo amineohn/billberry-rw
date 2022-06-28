@@ -48,7 +48,6 @@ const TaskForm = (props: Props) => {
     { id: 5, name: 'Katelyn Rohan', unavailable: false },
   ]
   const [query, setQuery] = useState('')*/
-
   return (
     <div className="rw-form-wrapper">
       <Form onSubmit={onSubmit} error={props.error}>

@@ -5,7 +5,7 @@ import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 interface Props {
   data: string[]
   query: string
-  onChange: any
+  onChange: () => void
   setQuery: (query: string) => void
   placeholder?: string
   value?: string
@@ -62,43 +62,45 @@ const Combo = ({ data, query, onChange, setQuery }: Props) => {
                   Nothing found.
                 </div>
               ) : (
-                filtered.map((data: any) => {
-                  return (
-                    <Combobox.Option
-                      key={data.id}
-                      className={({ active }) =>
-                        `relative cursor-default select-none py-2 pl-10 pr-4 ${
-                          active ? 'bg-teal-600 text-white' : 'text-gray-900'
-                        }`
-                      }
-                      value={data}
-                    >
-                      {({ selected, active }) => (
-                        <>
-                          <span
-                            className={`block truncate ${
-                              selected ? 'font-medium' : 'font-normal'
-                            }`}
-                          >
-                            {data.name}
-                          </span>
-                          {selected ? (
+                <>
+                  {filtered.map((data: any) => {
+                    return (
+                      <Combobox.Option
+                        key={data.id}
+                        className={({ active }) =>
+                          `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                            active ? 'bg-teal-600 text-white' : 'text-gray-900'
+                          }`
+                        }
+                        value={data}
+                      >
+                        {({ selected, active }) => (
+                          <>
                             <span
-                              className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
-                                active ? 'text-white' : 'text-teal-600'
+                              className={`block truncate ${
+                                selected ? 'font-medium' : 'font-normal'
                               }`}
                             >
-                              <CheckIcon
-                                className="h-5 w-5"
-                                aria-hidden="true"
-                              />
+                              {data.name}
                             </span>
-                          ) : null}
-                        </>
-                      )}
-                    </Combobox.Option>
-                  )
-                })
+                            {selected ? (
+                              <span
+                                className={`absolute inset-y-0 left-0 flex items-center pl-3 ${
+                                  active ? 'text-white' : 'text-teal-600'
+                                }`}
+                              >
+                                <CheckIcon
+                                  className="h-5 w-5"
+                                  aria-hidden="true"
+                                />
+                              </span>
+                            ) : null}
+                          </>
+                        )}
+                      </Combobox.Option>
+                    )
+                  })}
+                </>
               )}
             </Combobox.Options>
           </Transition>
