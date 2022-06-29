@@ -6,6 +6,7 @@ import {
   TextField,
   Submit,
 } from '@redwoodjs/forms'
+
 import { RWGqlError } from '../../../../interfaces'
 
 interface Props {
@@ -17,6 +18,7 @@ interface Props {
   }
   loading: boolean
 }
+
 const EquipmentForm = (props: Props) => {
   const onSubmit = (data) => {
     props.onSave(data, props?.equipment?.id)

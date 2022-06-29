@@ -1,0 +1,41 @@
+enum Role {
+  USER
+  ADMIN
+}
+model UserRole {
+  id             Int @id @default(autoincrement())
+  userId         Int @relation(fields: [userId], references: [id])
+  role           String
+}
+model Mission {
+  id             Int @id @default(autoincrement())
+  userId         Int @relation(fields: [userId], references: [id])
+  user           User
+  title          String
+  start          DateTime
+  end            DateTime
+  status         String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now())
+}
+model MissionTask {
+  id             Int @id @default(autoincrement())
+  missionId      Int @relation(fields: [missionId], references: [id])
+  mission        Mission
+  taskId         Int @relation(fields: [taskId], references: [id])
+  task           Task
+  status         String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now())
+}
+model Clients {
+  id             Int @id @default(autoincrement())
+  userId         Int @relation(fields: [userId], references: [id])
+  user           User
+  title          String
+  start          DateTime
+  end            DateTime
+  status         String
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now())
+}

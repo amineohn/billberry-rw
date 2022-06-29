@@ -16,6 +16,7 @@ const DELETE_EQUIPMENT_MUTATION = gql`
 
 const MAX_STRING_LENGTH = 150
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const formatEnum = (values: string | string[] | null | undefined) => {
   if (values) {
     if (Array.isArray(values)) {
@@ -35,21 +36,25 @@ const truncate = (text) => {
   return output
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const jsonTruncate = (obj) => {
   return truncate(JSON.stringify(obj, null, 2))
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const timeTag = (datetime) => {
+  const date = new Date(datetime).toUTCString()
   return (
     datetime && (
       <time dateTime={datetime} title={datetime}>
-        {new Date(datetime).toUTCString()}
+        {date}
       </time>
     )
   )
 }
 
-const checkboxInputTag = (checked) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const checkboxInputTag = (checked: boolean) => {
   return <input type="checkbox" checked={checked} disabled />
 }
 
@@ -68,9 +73,9 @@ const EquimentList = ({ equiment }) => {
     awaitRefetchQueries: true,
   })
 
-  const onDeleteClick = (id) => {
+  const onDeleteClick = (id: number) => {
     if (confirm('Are you sure you want to delete equipment ' + id + '?')) {
-      deleteEquipment({ variables: { id } })
+      deleteEquipment({ variables: { id } }).then((r) => console.log(r))
     }
   }
   interface Props {

@@ -12,44 +12,46 @@ generator client {
 // to create migrations for them and apply to your dev DB.
 
 model Customer {
-  id    Int      @id @default(autoincrement())
-  name  String
-  tasks Task[]
+  id      Int       @id @default(autoincrement())
+  name    String
+  tasks   Task[]
+  Mission Mission[]
 }
 
 model Site {
-  id    Int      @id @default(autoincrement())
+  id    Int    @id @default(autoincrement())
   name  String
   tasks Task[]
 }
 
 model Container {
-  id    Int      @id @default(autoincrement())
+  id    Int    @id @default(autoincrement())
   name  String
   tasks Task[]
 }
 
 model Material {
-  id    Int      @id @default(autoincrement())
+  id    Int    @id @default(autoincrement())
   name  String
   tasks Task[]
 }
 
 model Service {
-  id    Int      @id @default(autoincrement())
+  id    Int    @id @default(autoincrement())
   name  String
   tasks Task[]
 }
 
 model Worker {
-  id    Int      @id @default(autoincrement())
-  name  String
-  tasks Task[]
+  id      Int       @id @default(autoincrement())
+  name    String
+  tasks   Task[]
+  Mission Mission[]
 }
 
 model Equipment {
-  id    Int      @id @default(autoincrement())
-  name  String
+  id     Int    @id @default(autoincrement())
+  status String
   //tasks Task[]
 }
 
@@ -73,13 +75,25 @@ model Task {
   title       String    @default("")
 }
 
-
 // auth
 model User {
-  id             Int @id @default(autoincrement())
-  email          String  @unique
-  hashedPassword      String    // <─┐
-  salt                String    // <─┼─ add these lines
-  resetToken          String?   // <─┤
+  id                  Int       @id @default(autoincrement())
+  email               String    @unique
+  hashedPassword      String // <─┐
+  salt                String // <─┼─ add these lines
+  resetToken          String? // <─┤
   resetTokenExpiresAt DateTime? // <─┘
+  userId              Int // <─┐
+  // roleId              UserRole    @relation(fields: [userId], references: [id])
+}
+
+model Mission {
+  id         Int      @id @default(autoincrement())
+  status     String   @default("")
+  start      DateTime @default(now())
+  end        DateTime @default(now())
+  worker     Worker   @relation(fields: [workerId], references: [id])
+  workerId   Int
+  customer   Customer @relation(fields: [customerId], references: [id])
+  customerId Int
 }
