@@ -78,6 +78,7 @@ export const Success = ({ task }: CellSuccessProps<EditTaskById>) => {
 
   const onSave = (input: Data, id) => {
     const castInput = Object.assign(input, {
+      id: parseInt(id),
       workerId: input.workerId,
       customerId: input.customerId,
       siteId: input.siteId,
