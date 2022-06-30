@@ -11,18 +11,13 @@ const SitesLayout = ({ children }: SiteLayoutProps) => {
       <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
       <header className="rw-header">
         <h1 className="rw-heading rw-heading-primary">
-          <Link
-            to={routes.sites()}
-            className="rw-link"
-          >
+          <Link to={routes.sites()} className="rw-link">
             Sites
           </Link>
         </h1>
-        <Link
-          to={routes.newSite()}
-          className="rw-button rw-button-green"
-        >
-          <div className="rw-button-icon">+</div> New Site
+        <Link to={routes.newSite()} className="rw-button rw-button-green">
+          <div className="rw-button-icon">+</div>
+          New Site
         </Link>
       </header>
       <main className="rw-main">{children}</main>

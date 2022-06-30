@@ -1,11 +1,5 @@
-import {
-  missions,
-  mission,
-  createMission,
-  updateMission,
-  deleteMission,
-} from './missions'
-import type { StandardScenario } from './missions.scenarios'
+import { createMission, deleteMission, mission, missions, updateMission } from "./missions";
+import type { StandardScenario } from "./missions.scenarios";
 
 // Generated boilerplate tests do not account for all circumstances
 // and can fail without adjustments, e.g. Float and DateTime types.

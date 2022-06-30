@@ -1,11 +1,5 @@
-import {
-  workers,
-  worker,
-  createWorker,
-  updateWorker,
-  deleteWorker,
-} from './workers'
-import type { StandardScenario } from './workers.scenarios'
+import { createWorker, deleteWorker, updateWorker, worker, workers } from "./workers";
+import type { StandardScenario } from "./workers.scenarios";
 
 // Generated boilerplate tests do not account for all circumstances
 // and can fail without adjustments, e.g. Float and DateTime types.

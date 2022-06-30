@@ -1,6 +1,6 @@
 import humanize from 'humanize-string'
 
-import { Link, routes, navigate } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
@@ -66,14 +66,17 @@ const Equipment = ({ equipment }) => {
     <>
       <div className="rw-segment">
         <header className="rw-segment-header">
-          <h2 className="rw-heading rw-heading-secondary">Equipment {equipment.id} Detail</h2>
+          <h2 className="rw-heading rw-heading-secondary">
+            Equipment {equipment.id} Detail
+          </h2>
         </header>
         <table className="rw-table">
           <tbody>
             <tr>
               <th>Id</th>
               <td>{equipment.id}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Name</th>
               <td>{equipment.name}</td>
             </tr>

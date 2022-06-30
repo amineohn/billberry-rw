@@ -8,6 +8,7 @@ import { Link } from '@redwoodjs/router'
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
+
 const Navigation = () => {
   const navigation = [
     {

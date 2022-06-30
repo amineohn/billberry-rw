@@ -5,11 +5,13 @@ interface ServerParseError extends Error {
   statusCode: number
   bodyText: string
 }
+
 interface ServerError extends Error {
   response: Response
   statusCode: number
   result: Record<string, any>
 }
+
 export interface RWGqlError {
   message: string
   graphQLErrors: ReadonlyArray<GraphQLError>

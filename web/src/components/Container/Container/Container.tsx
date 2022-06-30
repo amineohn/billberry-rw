@@ -1,6 +1,6 @@
 import humanize from 'humanize-string'
 
-import { Link, routes, navigate } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
@@ -44,12 +44,14 @@ const timeTag = (datetime) => {
 const checkboxInputTag = (checked) => {
   return <input type="checkbox" checked={checked} disabled />
 }
+
 interface Props {
   container: {
     id: number
     name: string
   }
 }
+
 const Container = ({ container }: Props) => {
   const [deleteContainer] = useMutation(DELETE_CONTAINER_MUTATION, {
     onCompleted: () => {

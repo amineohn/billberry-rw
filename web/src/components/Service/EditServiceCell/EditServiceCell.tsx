@@ -1,7 +1,7 @@
 import type { EditServiceById } from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
@@ -31,15 +31,18 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ service }: CellSuccessProps<EditServiceById>) => {
-  const [updateService, { loading, error }] = useMutation(UPDATE_SERVICE_MUTATION, {
-    onCompleted: () => {
-      toast.success('Service updated')
-      navigate(routes.services())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
+  const [updateService, { loading, error }] = useMutation(
+    UPDATE_SERVICE_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Service updated')
+        navigate(routes.services())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
 
   const onSave = (input, id) => {
     updateService({ variables: { id, input } })
@@ -48,10 +51,17 @@ export const Success = ({ service }: CellSuccessProps<EditServiceById>) => {
   return (
     <div className="rw-segment">
       <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">Edit Service {service.id}</h2>
+        <h2 className="rw-heading rw-heading-secondary">
+          Edit Service {service.id}
+        </h2>
       </header>
       <div className="rw-segment-main">
-        <ServiceForm service={service} onSave={onSave} error={error} loading={loading} />
+        <ServiceForm
+          service={service}
+          onSave={onSave}
+          error={error}
+          loading={loading}
+        />
       </div>
     </div>
   )

@@ -13,18 +13,24 @@ const CREATE_MISSION_MUTATION = gql`
 `
 
 const NewMission = () => {
-  const [createMission, { loading, error }] = useMutation(CREATE_MISSION_MUTATION, {
-    onCompleted: () => {
-      toast.success('Mission created')
-      navigate(routes.missions())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
+  const [createMission, { loading, error }] = useMutation(
+    CREATE_MISSION_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Mission created')
+        navigate(routes.missions())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
 
   const onSave = (input) => {
-    const castInput = Object.assign(input, { workerId: parseInt(input.workerId), customerId: parseInt(input.customerId), })
+    const castInput = Object.assign(input, {
+      workerId: parseInt(input.workerId),
+      customerId: parseInt(input.customerId),
+    })
     createMission({ variables: { input: castInput } })
   }
 

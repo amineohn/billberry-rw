@@ -1,6 +1,6 @@
 import type { FindEquipmentById } from 'types/graphql'
 
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 
 import Equipment from 'src/components/Equipment/Equipment'
 

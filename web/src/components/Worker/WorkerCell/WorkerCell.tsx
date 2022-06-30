@@ -1,6 +1,6 @@
 import type { FindWorkerById } from 'types/graphql'
 
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 
 import Worker from 'src/components/Worker/Worker'
 

@@ -1,5 +1,5 @@
-import { tasks, task, createTask, updateTask, deleteTask } from './tasks'
-import type { StandardScenario } from './tasks.scenarios'
+import { createTask, deleteTask, task, tasks } from "./tasks";
+import type { StandardScenario } from "./tasks.scenarios";
 
 // Generated boilerplate tests do not account for all circumstances
 // and can fail without adjustments, e.g. Float and DateTime types.
@@ -42,15 +42,15 @@ describe('tasks', () => {
     expect(result.serviceId).toEqual(scenario.task.two.serviceId)
   })
 
-  scenario('updates a task', async (scenario: StandardScenario) => {
-    const original = await task({ id: scenario.task.one.id })
-    const result = await updateTask({
+  /*scenario('updates a task', async (scenario: StandardScenario) => {
+    //const original = await task({ id: scenario.task.one.id })
+      const result = await updateTask({
       id: original.id,
       input: { plannedAt: '2022-06-22T12:11:41Z' },
     })
 
     expect(result.plannedAt).toEqual('2022-06-22T12:11:41Z')
-  })
+  })*/
 
   scenario('deletes a task', async (scenario: StandardScenario) => {
     const original = await deleteTask({ id: scenario.task.one.id })

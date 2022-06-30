@@ -10,6 +10,7 @@ interface Props {
   isOpen: boolean
   closeModal: () => void
 }
+
 const Alert = ({
   title,
   content,

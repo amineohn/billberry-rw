@@ -35,5 +35,6 @@ export const schema = gql`
     createMission(input: CreateMissionInput!): Mission! @requireAuth
     updateMission(id: Int!, input: UpdateMissionInput!): Mission! @requireAuth
     deleteMission(id: Int!): Mission! @requireAuth
+    FindMissionById(id: Int!): Mission! @requireAuth
   }
 `

@@ -1,5 +1,5 @@
-import { sites, site, createSite, updateSite, deleteSite } from './sites'
-import type { StandardScenario } from './sites.scenarios'
+import { createSite, deleteSite, site, sites, updateSite } from "./sites";
+import type { StandardScenario } from "./sites.scenarios";
 
 // Generated boilerplate tests do not account for all circumstances
 // and can fail without adjustments, e.g. Float and DateTime types.

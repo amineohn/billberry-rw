@@ -1,7 +1,7 @@
 import type { EditMissionById } from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
@@ -39,28 +39,41 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ mission }: CellSuccessProps<EditMissionById>) => {
-  const [updateMission, { loading, error }] = useMutation(UPDATE_MISSION_MUTATION, {
-    onCompleted: () => {
-      toast.success('Mission updated')
-      navigate(routes.missions())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
+  const [updateMission, { loading, error }] = useMutation(
+    UPDATE_MISSION_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Mission updated')
+        navigate(routes.missions())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
 
   const onSave = (input, id) => {
-    const castInput = Object.assign(input, { workerId: parseInt(input.workerId), customerId: parseInt(input.customerId), })
+    const castInput = Object.assign(input, {
+      workerId: parseInt(input.workerId),
+      customerId: parseInt(input.customerId),
+    })
     updateMission({ variables: { id, input: castInput } })
   }
 
   return (
     <div className="rw-segment">
       <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">Edit Mission {mission.id}</h2>
+        <h2 className="rw-heading rw-heading-secondary">
+          Edit Mission {mission.id}
+        </h2>
       </header>
       <div className="rw-segment-main">
-        <MissionForm mission={mission} onSave={onSave} error={error} loading={loading} />
+        <MissionForm
+          mission={mission}
+          onSave={onSave}
+          error={error}
+          loading={loading}
+        />
       </div>
     </div>
   )

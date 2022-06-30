@@ -1,8 +1,9 @@
 import humanize from 'humanize-string'
 
-import { Link, routes, navigate } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
+
 import { RWGqlError } from '../../../../interfaces'
 
 const DELETE_MATERIAL_MUTATION = gql`
@@ -12,7 +13,7 @@ const DELETE_MATERIAL_MUTATION = gql`
     }
   }
 `
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const formatEnum = (values: string | string[] | null | undefined) => {
   if (values) {
     if (Array.isArray(values)) {
@@ -24,7 +25,8 @@ const formatEnum = (values: string | string[] | null | undefined) => {
   }
 }
 
-const jsonDisplay = (obj) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const jsonDisplay = (obj: any) => {
   return (
     <pre>
       <code>{JSON.stringify(obj, null, 2)}</code>
@@ -32,6 +34,7 @@ const jsonDisplay = (obj) => {
   )
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const timeTag = (datetime) => {
   return (
     datetime && (
@@ -41,19 +44,21 @@ const timeTag = (datetime) => {
     )
   )
 }
-
-const checkboxInputTag = (checked) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const checkboxInputTag = (checked: boolean) => {
   return <input type="checkbox" checked={checked} disabled />
 }
+
 interface Props {
-  error: RWGqlError | null
-  onSave: (data, id) => void
-  material: {
+  error?: RWGqlError | null
+  onSave?: (data, id) => void
+  material?: {
     id: number
     name: string
   }
-  loading: boolean
+  loading?: boolean
 }
+
 const Material = ({ material }: Props) => {
   const [deleteMaterial] = useMutation(DELETE_MATERIAL_MUTATION, {
     onCompleted: () => {
@@ -65,9 +70,9 @@ const Material = ({ material }: Props) => {
     },
   })
 
-  const onDeleteClick = (id) => {
+  const onDeleteClick = (id: number) => {
     if (confirm('Are you sure you want to delete material ' + id + '?')) {
-      deleteMaterial({ variables: { id } })
+      deleteMaterial({ variables: { id } }).then((r) => console.log(r))
     }
   }
 

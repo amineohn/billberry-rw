@@ -1,7 +1,7 @@
 import type { FindSites } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 
 import Sites from 'src/components/Site/Sites'
 
@@ -20,10 +20,7 @@ export const Empty = () => {
   return (
     <div className="rw-text-center">
       {'No sites yet. '}
-      <Link
-        to={routes.newSite()}
-        className="rw-link"
-      >
+      <Link to={routes.newSite()} className="rw-link">
         {'Create one?'}
       </Link>
     </div>

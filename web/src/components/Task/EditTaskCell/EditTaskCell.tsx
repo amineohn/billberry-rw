@@ -1,7 +1,7 @@
 import type { EditTaskById } from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
@@ -63,6 +63,7 @@ export const Success = ({ task }: CellSuccessProps<EditTaskById>) => {
       return value.replace(/:\d{2}\.\d{3}\w/, '')
     }
   }
+
   interface Data {
     workerId: number
     customerId: number
@@ -74,6 +75,7 @@ export const Success = ({ task }: CellSuccessProps<EditTaskById>) => {
     start: string
     end: string
   }
+
   const onSave = (input: Data, id) => {
     const castInput = Object.assign(input, {
       workerId: input.workerId,

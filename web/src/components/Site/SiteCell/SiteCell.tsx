@@ -1,6 +1,6 @@
 import type { FindSiteById } from 'types/graphql'
 
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 
 import Site from 'src/components/Site/Site'
 

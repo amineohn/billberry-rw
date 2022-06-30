@@ -13,15 +13,18 @@ const CREATE_MATERIAL_MUTATION = gql`
 `
 
 const NewMaterial = () => {
-  const [createMaterial, { loading, error }] = useMutation(CREATE_MATERIAL_MUTATION, {
-    onCompleted: () => {
-      toast.success('Material created')
-      navigate(routes.materials())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
+  const [createMaterial, { loading, error }] = useMutation(
+    CREATE_MATERIAL_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Material created')
+        navigate(routes.materials())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
 
   const onSave = (input) => {
     createMaterial({ variables: { input } })

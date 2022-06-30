@@ -5,7 +5,6 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Material/MaterialsCell'
-import { RWGqlError } from '../../../../interfaces'
 
 const DELETE_MATERIAL_MUTATION = gql`
   mutation DeleteMaterialMutation($id: Int!) {

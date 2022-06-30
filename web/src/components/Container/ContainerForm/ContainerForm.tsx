@@ -1,12 +1,13 @@
 import {
+  FieldError,
   Form,
   FormError,
-  FieldError,
   Label,
-  TextField,
   Submit,
+  TextField,
 } from '@redwoodjs/forms'
 import { RWGqlError } from '../../../../interfaces'
+
 interface Props {
   error: RWGqlError | null
   onSave: (data, id) => void
@@ -16,6 +17,7 @@ interface Props {
   }
   loading: boolean
 }
+
 const ContainerForm = (props: Props) => {
   const onSubmit = (data) => {
     props.onSave(data, props?.container?.id)

@@ -1,7 +1,7 @@
 import type { EditEquipmentById } from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
@@ -31,15 +31,18 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ equipment }: CellSuccessProps<EditEquipmentById>) => {
-  const [updateEquipment, { loading, error }] = useMutation(UPDATE_EQUIPMENT_MUTATION, {
-    onCompleted: () => {
-      toast.success('Equipment updated')
-      navigate(routes.equiment())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
+  const [updateEquipment, { loading, error }] = useMutation(
+    UPDATE_EQUIPMENT_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Equipment updated')
+        navigate(routes.equiment())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
 
   const onSave = (input, id) => {
     updateEquipment({ variables: { id, input } })
@@ -48,10 +51,17 @@ export const Success = ({ equipment }: CellSuccessProps<EditEquipmentById>) => {
   return (
     <div className="rw-segment">
       <header className="rw-segment-header">
-        <h2 className="rw-heading rw-heading-secondary">Edit Equipment {equipment.id}</h2>
+        <h2 className="rw-heading rw-heading-secondary">
+          Edit Equipment {equipment.id}
+        </h2>
       </header>
       <div className="rw-segment-main">
-        <EquipmentForm equipment={equipment} onSave={onSave} error={error} loading={loading} />
+        <EquipmentForm
+          equipment={equipment}
+          onSave={onSave}
+          error={error}
+          loading={loading}
+        />
       </div>
     </div>
   )

@@ -24,7 +24,14 @@ const NewTask = () => {
   })
 
   const onSave = (input) => {
-    const castInput = Object.assign(input, { workerId: parseInt(input.workerId), customerId: parseInt(input.customerId), siteId: parseInt(input.siteId), containerId: parseInt(input.containerId), materialId: parseInt(input.materialId), serviceId: parseInt(input.serviceId), })
+    const castInput = Object.assign(input, {
+      workerId: parseInt(input.workerId),
+      customerId: parseInt(input.customerId),
+      siteId: parseInt(input.siteId),
+      containerId: parseInt(input.containerId),
+      materialId: parseInt(input.materialId),
+      serviceId: parseInt(input.serviceId),
+    })
     createTask({ variables: { input: castInput } })
   }
 

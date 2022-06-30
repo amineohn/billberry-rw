@@ -6,6 +6,7 @@ import { toast } from '@redwoodjs/web/toast'
 
 import Calenda from 'src/components/Calendar'
 import { QUERY } from 'src/components/Task/TasksCell'
+
 const DELETE_TASK_MUTATION = gql`
   mutation DeleteTaskMutation($id: Int!) {
     deleteTask(id: $id) {
@@ -24,7 +25,7 @@ const truncate = (text) => {
 }
 
 interface Props {
-  tasks: [
+  tasks?: [
     {
       id: number
       plannedAt: string
@@ -58,6 +59,7 @@ interface Props {
     }
   ]
 }
+
 export const GET_ALL_TABLE_DATA = gql`
   query GetAllTableData {
     tasks {

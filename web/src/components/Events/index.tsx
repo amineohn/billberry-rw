@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types'
+
 interface IEvent {
   title: string
   serviceName: string
@@ -8,9 +9,11 @@ interface IEvent {
   workerName: string
   desc?: string
 }
+
 interface IEventsProps {
   event: IEvent
 }
+
 function MyEvent({ event }: IEventsProps) {
   return (
     <span className="flex flex-col">
@@ -24,6 +27,7 @@ function MyEvent({ event }: IEventsProps) {
     </span>
   )
 }
+
 MyEvent.propTypes = {
   event: PropTypes.object,
 }

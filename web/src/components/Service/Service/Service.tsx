@@ -1,6 +1,6 @@
 import humanize from 'humanize-string'
 
-import { Link, routes, navigate } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 import { RWGqlError } from '../../../../interfaces'
@@ -45,6 +45,7 @@ const timeTag = (datetime) => {
 const checkboxInputTag = (checked) => {
   return <input type="checkbox" checked={checked} disabled />
 }
+
 interface Props {
   error: RWGqlError | null
   onSave: (data, id) => void
@@ -54,6 +55,7 @@ interface Props {
   }
   loading: boolean
 }
+
 const Service = ({ service }: Props) => {
   const [deleteService] = useMutation(DELETE_SERVICE_MUTATION, {
     onCompleted: () => {

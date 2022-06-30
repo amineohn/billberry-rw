@@ -1,10 +1,10 @@
 import {
+  FieldError,
   Form,
   FormError,
-  FieldError,
   Label,
-  TextField,
   Submit,
+  TextField,
 } from '@redwoodjs/forms'
 import { RWGqlError } from '../../../../interfaces'
 

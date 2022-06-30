@@ -78,10 +78,12 @@ const EquimentList = ({ equiment }) => {
       deleteEquipment({ variables: { id } }).then((r) => console.log(r))
     }
   }
+
   interface Props {
     id: number
     name: string
   }
+
   return (
     <div className="rw-segment rw-table-wrapper-responsive">
       <table className="rw-table">

@@ -53,6 +53,7 @@ const timeTag = (datetime) => {
 const checkboxInputTag = (checked) => {
   return <input type="checkbox" checked={checked} disabled />
 }
+
 interface Props {
   error: RWGqlError | null
   onSave: (data, id) => void
@@ -61,6 +62,7 @@ interface Props {
 
   loading: boolean
 }
+
 const ServicesList = ({ services }) => {
   const [deleteService] = useMutation(DELETE_SERVICE_MUTATION, {
     onCompleted: () => {

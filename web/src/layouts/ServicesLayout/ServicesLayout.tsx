@@ -11,18 +11,13 @@ const ServicesLayout = ({ children }: ServiceLayoutProps) => {
       <Toaster toastOptions={{ className: 'rw-toast', duration: 6000 }} />
       <header className="rw-header">
         <h1 className="rw-heading rw-heading-primary">
-          <Link
-            to={routes.services()}
-            className="rw-link"
-          >
+          <Link to={routes.services()} className="rw-link">
             Services
           </Link>
         </h1>
-        <Link
-          to={routes.newService()}
-          className="rw-button rw-button-green"
-        >
-          <div className="rw-button-icon">+</div> New Service
+        <Link to={routes.newService()} className="rw-button rw-button-green">
+          <div className="rw-button-icon">+</div>
+          New Service
         </Link>
       </header>
       <main className="rw-main">{children}</main>

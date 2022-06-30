@@ -1,6 +1,6 @@
 import type { FindMaterialById } from 'types/graphql'
 
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 
 import Material from 'src/components/Material/Material'
 

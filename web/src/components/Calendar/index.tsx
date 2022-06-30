@@ -1,4 +1,4 @@
-import { useCallback, useState, useMemo } from 'react'
+import { FormEvent, useCallback, useMemo, useState } from 'react'
 
 import { CalendarIcon } from '@heroicons/react/outline'
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/solid'
@@ -13,6 +13,7 @@ import { toast } from '@redwoodjs/web/toast'
 import { EDIT_TASK_QUERY } from 'src/components/Task/Tasks/Tasks'
 
 import MyEvent from '../Events'
+
 interface Props {
   tasks: [
     {
@@ -48,6 +49,7 @@ interface Props {
     }
   ]
 }
+
 const Calenda = ({ tasks }: Props) => {
   const formatDate = (startTime: string) => {
     const time = new Date(startTime)
@@ -135,7 +137,7 @@ const Calenda = ({ tasks }: Props) => {
   )
 
   const customOnDragOver = useCallback(
-    (dragEvent) => {
+    (dragEvent: FormEvent) => {
       if (draggedEvent !== 'undroppable') {
         dragEvent.preventDefault()
       }
@@ -202,6 +204,22 @@ const Calenda = ({ tasks }: Props) => {
     }),
     []
   )
+  const handleSelectSlot = useCallback(
+    ({ start, end }) => {
+      const title = window.prompt('New Event Name')
+      if (title) {
+        /*setEvents((prev) => {
+          const existing = prev.find((ev) => ev.id === event.id) ?? {}
+          const filtered = prev.filter((ev) => ev.id !== event.id)
+          return [...filtered, { ...existing, start, end }]
+        })*/
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        setEvents((prev) => [...prev, { start, end, title }])
+      }
+    },
+    [setEvents]
+  )
   const dayPropGetter = useCallback(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (date: Date) => ({
@@ -211,6 +229,16 @@ const Calenda = ({ tasks }: Props) => {
     }),
     []
   )
+  /*const handleSubmit = (e: FormEvent<HTMLInputElement>) => {
+    e.preventDefault()
+    const { value } = e.currentTarget
+    setCounters((prev) => {
+      const newCounters = { ...prev }
+      newCounters[value] = newCounters[value] + 1
+      return newCounters
+    })
+  }*/
+
   // eslint-disable-next-line react-hooks/exhaustive-deps,@typescript-eslint/ban-ts-comment
   // @ts-ignore
   const components = useMemo(() => ({
@@ -233,7 +261,7 @@ const Calenda = ({ tasks }: Props) => {
         onEventResize={resizeEvent}
         eventPropGetter={eventPropGetter}
         onSelectEvent={handleSelectEvent}
-        resizable={true}
+        resizable
         onSelectSlot={newEvent}
         messages={{
           next: <ArrowRightIcon className="w-5 h-5" />,
@@ -254,6 +282,7 @@ const Calenda = ({ tasks }: Props) => {
         dayPropGetter={dayPropGetter}
         components={components}
         popup={true}
+        toolbar={true}
       />
     </>
   )

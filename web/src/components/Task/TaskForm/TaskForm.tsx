@@ -1,22 +1,19 @@
 import {
+  DatetimeLocalField,
+  FieldError,
   Form,
   FormError,
-  FieldError,
   Label,
-  DatetimeLocalField,
   NumberField,
   Submit,
 } from '@redwoodjs/forms'
+
+import { formatDatetime } from 'src/utils'
 
 import { RWGqlError } from '../../../../interfaces'
 
 //import Combo from 'src/components/Combobox'
 
-const formatDatetime = (value) => {
-  if (value) {
-    return value.replace(/:\d{2}\.\d{3}\w/, '')
-  }
-}
 interface Props {
   error: RWGqlError | null
   onSave: (data, id) => void
@@ -35,19 +32,15 @@ interface Props {
   }
   loading?: boolean
 }
+
 const TaskForm = (props: Props) => {
   const onSubmit = (data) => {
     props.onSave(data, props?.task?.id)
   }
-  /*
-  const data = [
-    { id: 1, name: 'Durward Reynolds', unavailable: false },
-    { id: 2, name: 'Kenton Towne', unavailable: false },
-    { id: 3, name: 'Therese Wunsch', unavailable: false },
-    { id: 4, name: 'Benedict Kessler', unavailable: true },
-    { id: 5, name: 'Katelyn Rohan', unavailable: false },
-  ]
-  const [query, setQuery] = useState('')*/
+  const startTime = (dateTime: string): string => {
+    const date = new Date(dateTime)
+    return date as any
+  }
   return (
     <div className="rw-form-wrapper">
       <Form onSubmit={onSubmit} error={props.error}>
@@ -93,7 +86,7 @@ const TaskForm = (props: Props) => {
 
         <DatetimeLocalField
           name="plannedAt"
-          defaultValue={formatDatetime(props.task?.start)}
+          defaultValue={startTime(props.task?.start)}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}
@@ -113,12 +106,12 @@ const TaskForm = (props: Props) => {
           className="rw-label"
           errorClassName="rw-label rw-label-error"
         >
-          end
+          End
         </Label>
 
         <DatetimeLocalField
           name="plannedAt"
-          defaultValue={formatDatetime(props.task?.end)}
+          defaultValue={startTime(props.task?.end)}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
           validation={{ required: true }}

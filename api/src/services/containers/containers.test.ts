@@ -1,11 +1,5 @@
-import {
-  containers,
-  container,
-  createContainer,
-  updateContainer,
-  deleteContainer,
-} from './containers'
-import type { StandardScenario } from './containers.scenarios'
+import { container, containers, createContainer, deleteContainer, updateContainer } from "./containers";
+import type { StandardScenario } from "./containers.scenarios";
 
 // Generated boilerplate tests do not account for all circumstances
 // and can fail without adjustments, e.g. Float and DateTime types.

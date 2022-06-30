@@ -1,6 +1,6 @@
 import type { FindContainerById } from 'types/graphql'
 
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 
 import Container from 'src/components/Container/Container'
 

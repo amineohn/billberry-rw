@@ -12,9 +12,9 @@ generator client {
 // to create migrations for them and apply to your dev DB.
 
 model Customer {
-  id      Int       @id @default(autoincrement())
-  name    String
-  tasks   Task[]
+  id    Int    @id @default(autoincrement())
+  name  String
+  tasks Task[]
   Mission Mission[]
 }
 
@@ -43,14 +43,14 @@ model Service {
 }
 
 model Worker {
-  id      Int       @id @default(autoincrement())
+  id    Int    @id @default(autoincrement())
   name    String
   tasks   Task[]
   Mission Mission[]
 }
 
 model Equipment {
-  id     Int    @id @default(autoincrement())
+  id    Int    @id @default(autoincrement())
   status String
   //tasks Task[]
 }
