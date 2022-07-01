@@ -25,7 +25,7 @@ const NewEquipment = () => {
     }
   )
 
-  const onSave = (input) => {
+  const onSave = (input: string) => {
     createEquipment({ variables: { input } }).then((r) => console.log(r))
   }
 

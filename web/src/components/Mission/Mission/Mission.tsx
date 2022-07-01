@@ -11,31 +11,6 @@ const DELETE_MISSION_MUTATION = gql`
     }
   }
 `
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const formatEnum = (values: string | string[] | null | undefined) => {
-  if (values) {
-    if (Array.isArray(values)) {
-      const humanizedValues = values.map((value) => humanize(value))
-      return humanizedValues.join(', ')
-    } else {
-      return humanize(values as string)
-    }
-  }
-}
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const jsonDisplay = (
-  value: any,
-  replacer?: (this: any, key: string, value: any) => any,
-  space?: string | number
-) => {
-  return (
-    <pre>
-      <code>{JSON.stringify(value, replacer, space)}</code>
-    </pre>
-  )
-}
-
 const timeTag = (datetime: string) => {
   return (
     datetime && (

@@ -207,9 +207,21 @@ const Calenda = ({ tasks }: Props) => {
   const dayPropGetter = useCallback(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (date: Date) => ({
+      /*...(moment(date).day() === 1 && {
+        className: '!bg-sky-500/50',
+      }),
       ...(moment(date).day() === 2 && {
         className: '!bg-green-500/50',
       }),
+      ...(moment(date).day() === 3 && {
+        className: '!bg-yellow-500/50',
+      }),
+      ...(moment(date).day() === 4 && {
+        className: '!bg-purple-500/50',
+      }),
+      ...(moment(date).day() === 5 && {
+        className: '!bg-blue-500/50',
+      }),*/
     }),
     []
   )

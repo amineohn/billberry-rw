@@ -1,5 +1,3 @@
-import humanize from 'humanize-string'
-
 import { Link, navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
@@ -13,37 +11,6 @@ const DELETE_MATERIAL_MUTATION = gql`
     }
   }
 `
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const formatEnum = (values: string | string[] | null | undefined) => {
-  if (values) {
-    if (Array.isArray(values)) {
-      const humanizedValues = values.map((value) => humanize(value))
-      return humanizedValues.join(', ')
-    } else {
-      return humanize(values as string)
-    }
-  }
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const jsonDisplay = (obj: any) => {
-  return (
-    <pre>
-      <code>{JSON.stringify(obj, null, 2)}</code>
-    </pre>
-  )
-}
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const timeTag = (datetime) => {
-  return (
-    datetime && (
-      <time dateTime={datetime} title={datetime}>
-        {new Date(datetime).toUTCString()}
-      </time>
-    )
-  )
-}
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const checkboxInputTag = (checked: boolean) => {
   return <input type="checkbox" checked={checked} disabled />

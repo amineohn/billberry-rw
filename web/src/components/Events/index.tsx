@@ -8,27 +8,30 @@ interface IEvent {
   materialName: string
   workerName: string
   desc?: string
-}
-
-interface IEventsProps {
   event: IEvent
 }
 
-function MyEvent({ event }: IEventsProps) {
+interface Props {
+  event: IEvent
+}
+
+function Events({ event }: Props) {
   return (
     <span className="flex flex-col">
-      <strong>{event.title}</strong>
-      <span>{event.serviceName}</span>
-      <span>{event.siteName}</span>
-      <span>{event.customerName}</span>
-      <span>{event.materialName}</span>
-      <span>{event.workerName}</span>
+      <strong>
+        {event.title.charAt(0).toUpperCase() + event.title.slice(1)}
+      </strong>
+      <span>service: {event.serviceName}</span>
+      <span>site: {event.siteName}</span>
+      <span>customer: {event.customerName}</span>
+      <span>material: {event.materialName}</span>
+      <span>worker: {event.workerName}</span>
       {event.desc && ':  ' + event.desc}
     </span>
   )
 }
 
-MyEvent.propTypes = {
+Events.propTypes = {
   event: PropTypes.object,
 }
-export default MyEvent
+export default Events
