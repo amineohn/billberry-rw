@@ -23,11 +23,15 @@ const formatEnum = (values: string | string[] | null | undefined) => {
     }
   }
 }
-
-const jsonDisplay = (obj: any) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const jsonDisplay = (
+  value: any,
+  replacer?: (this: any, key: string, value: any) => any,
+  space?: string | number
+) => {
   return (
     <pre>
-      <code>{JSON.stringify(obj, null, 2)}</code>
+      <code>{JSON.stringify(value, replacer, space)}</code>
     </pre>
   )
 }
@@ -41,7 +45,7 @@ const timeTag = (datetime: string) => {
     )
   )
 }
-
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const checkboxInputTag = (checked: boolean) => {
   return <input type="checkbox" checked={checked} disabled />
 }

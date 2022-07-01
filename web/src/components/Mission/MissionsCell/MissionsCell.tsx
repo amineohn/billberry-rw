@@ -1,3 +1,5 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import type { FindMissions } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'

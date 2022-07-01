@@ -3,6 +3,7 @@ import humanize from 'humanize-string'
 import { Link, navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
+
 import { RWGqlError } from '../../../../interfaces'
 
 const DELETE_SERVICE_MUTATION = gql`

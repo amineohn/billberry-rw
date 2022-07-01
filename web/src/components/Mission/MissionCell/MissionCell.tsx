@@ -1,10 +1,8 @@
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import type { FindMissionById } from "types/graphql";
+import type { FindMissionById } from 'types/graphql'
 
-import type { CellFailureProps, CellSuccessProps } from "@redwoodjs/web";
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 
-import Mission from "src/components/Mission/Mission";
+import Mission from 'src/components/Mission/Mission'
 
 export const QUERY = gql`
   query FindMissionById($id: Int!) {

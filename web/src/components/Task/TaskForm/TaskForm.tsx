@@ -85,7 +85,7 @@ const TaskForm = (props: Props) => {
         </Label>
 
         <DatetimeLocalField
-          name="plannedAt"
+          name="start"
           defaultValue={startTime(props.task?.start)}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
@@ -110,7 +110,7 @@ const TaskForm = (props: Props) => {
         </Label>
 
         <DatetimeLocalField
-          name="plannedAt"
+          name="end"
           defaultValue={startTime(props.task?.end)}
           className="rw-input"
           errorClassName="rw-input rw-input-error"

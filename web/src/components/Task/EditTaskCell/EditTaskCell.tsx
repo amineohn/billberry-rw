@@ -58,9 +58,9 @@ export const Success = ({ task }: CellSuccessProps<EditTaskById>) => {
       toast.error(error.message)
     },
   })
-  const parseDateTime = (value: any): Date => {
+  const parseDateTime = (value: string): Date => {
     if (value) {
-      return value.replace(/:\d{2}\.\d{3}\w/, '')
+      return value.replace(/:\d{2}\.\d{3}\w/, '') as any
     }
   }
 

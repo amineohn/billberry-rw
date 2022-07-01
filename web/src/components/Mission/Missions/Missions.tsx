@@ -16,6 +16,7 @@ const DELETE_MISSION_MUTATION = gql`
 
 const MAX_STRING_LENGTH = 150
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const formatEnum = (values: string | string[] | null | undefined) => {
   if (values) {
     if (Array.isArray(values)) {
@@ -35,6 +36,7 @@ const truncate = (text) => {
   return output
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const jsonTruncate = (obj) => {
   return truncate(JSON.stringify(obj, null, 2))
 }
@@ -49,6 +51,7 @@ const timeTag = (datetime) => {
   )
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const checkboxInputTag = (checked) => {
   return <input type="checkbox" checked={checked} disabled />
 }
@@ -73,7 +76,14 @@ const MissionsList = ({ missions }) => {
       deleteMission({ variables: { id } })
     }
   }
-
+  interface Props {
+    id: number
+    status: string
+    start: string
+    end: string
+    workerId: number
+    customerId: number
+  }
   return (
     <div className="rw-segment rw-table-wrapper-responsive">
       <table className="rw-table">
@@ -89,7 +99,7 @@ const MissionsList = ({ missions }) => {
           </tr>
         </thead>
         <tbody>
-          {missions.map((mission) => (
+          {missions.map((mission: Props) => (
             <tr key={mission.id}>
               <td>{truncate(mission.id)}</td>
               <td>{truncate(mission.status)}</td>

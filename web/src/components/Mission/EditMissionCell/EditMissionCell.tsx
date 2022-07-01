@@ -1,4 +1,6 @@
-import type { EditMissionById } from 'types/graphql'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars,@typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { EditMissionById } from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
 import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
@@ -57,7 +59,9 @@ export const Success = ({ mission }: CellSuccessProps<EditMissionById>) => {
       workerId: parseInt(input.workerId),
       customerId: parseInt(input.customerId),
     })
-    updateMission({ variables: { id, input: castInput } })
+    updateMission({ variables: { id, input: castInput } }).then((r) =>
+      console.log(r)
+    )
   }
 
   return (

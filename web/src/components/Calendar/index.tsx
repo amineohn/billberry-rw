@@ -86,8 +86,8 @@ const Calenda = ({ tasks }: Props) => {
   ) => {
     const castInput = Object.assign(input, {
       id: input.id,
-      start: formatDate(input.start),
-      end: formatDate(input.end),
+      start: formatDate(input.start || ''),
+      end: formatDate(input.end || ''),
     })
     updateTask({ variables: { id, input: castInput } }).then((r) =>
       console.log(r)
@@ -96,7 +96,7 @@ const Calenda = ({ tasks }: Props) => {
   // fonctionne bien avec des données en dur mais pas avec les données de la base
   const lycos = tasks.map((task) => {
     return {
-      id: task.id,
+      id: task?.id,
       title: task.worker?.name,
       serviceName: task.service?.name,
       customerName: task.customer?.name,
@@ -104,8 +104,8 @@ const Calenda = ({ tasks }: Props) => {
       containerName: task.container?.name,
       materialName: task.material?.name,
       workerName: task.worker?.name,
-      start: task.start,
-      end: task.end,
+      start: task?.start,
+      end: task?.end,
     }
   })
   const [events, setEvents] = useState(lycos)
@@ -204,40 +204,15 @@ const Calenda = ({ tasks }: Props) => {
     }),
     []
   )
-  const handleSelectSlot = useCallback(
-    ({ start, end }) => {
-      const title = window.prompt('New Event Name')
-      if (title) {
-        /*setEvents((prev) => {
-          const existing = prev.find((ev) => ev.id === event.id) ?? {}
-          const filtered = prev.filter((ev) => ev.id !== event.id)
-          return [...filtered, { ...existing, start, end }]
-        })*/
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        setEvents((prev) => [...prev, { start, end, title }])
-      }
-    },
-    [setEvents]
-  )
   const dayPropGetter = useCallback(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (date: Date) => ({
-      /*...(moment(date).day() === 2 && {
-        className: '!bg-yellow-500/50',
-      }),*/
+      ...(moment(date).day() === 2 && {
+        className: '!bg-green-500/50',
+      }),
     }),
     []
   )
-  /*const handleSubmit = (e: FormEvent<HTMLInputElement>) => {
-    e.preventDefault()
-    const { value } = e.currentTarget
-    setCounters((prev) => {
-      const newCounters = { ...prev }
-      newCounters[value] = newCounters[value] + 1
-      return newCounters
-    })
-  }*/
 
   // eslint-disable-next-line react-hooks/exhaustive-deps,@typescript-eslint/ban-ts-comment
   // @ts-ignore
