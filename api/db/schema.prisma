@@ -75,7 +75,6 @@ model Task {
   title       String    @default("")
 }
 
-// auth
 model User {
   id                  Int       @id @default(autoincrement())
   email               String    @unique
@@ -84,7 +83,6 @@ model User {
   resetToken          String? // <─┤
   resetTokenExpiresAt DateTime? // <─┘
   userId              Int // <─┐
-  // roleId              UserRole    @relation(fields: [userId], references: [id])
 }
 
 model Mission {
@@ -92,8 +90,15 @@ model Mission {
   status     String   @default("")
   start      DateTime @default(now())
   end        DateTime @default(now())
-  worker     Worker   @relation(fields: [workerId], references: [id])
-  workerId   Int
-  customer   Customer @relation(fields: [customerId], references: [id])
+  customer   Customer @relation(fields: [clientId], references: [id])
+ }
+
+model Client {
+  id        Int      @id @default(autoincrement())
+  name      String   @default("")
+  mission   Mission  @relation(fields: [missionId], references: [id])
+  missionId Int
+  customer  Customer @relation(fields: [customerId], references: [id])
   customerId Int
+  checked   Boolean  @default(false)
 }
