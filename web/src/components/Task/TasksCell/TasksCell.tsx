@@ -46,7 +46,7 @@ export const Loading = () => <div>Loading...</div>
 export const Empty = () => {
   return (
     <div className="rw-text-center">
-      {'No tasks yet.'}
+      <p>{'No tasks yet.'}</p>
       <Link to={routes.newTask()} className="rw-link">
         {'Create one?'}
       </Link>

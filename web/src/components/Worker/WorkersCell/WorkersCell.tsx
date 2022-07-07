@@ -19,7 +19,7 @@ export const Loading = () => <div>Loading...</div>
 export const Empty = () => {
   return (
     <div className="rw-text-center">
-      {'No workers yet. '}
+      <p>{'No workers yet. '}</p>
       <Link to={routes.newWorker()} className="rw-link">
         {'Create one?'}
       </Link>

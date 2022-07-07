@@ -12,10 +12,11 @@ generator client {
 // to create migrations for them and apply to your dev DB.
 
 model Customer {
-  id    Int    @id @default(autoincrement())
-  name  String
-  tasks Task[]
+  id      Int       @id @default(autoincrement())
+  name    String
+  tasks   Task[]
   Mission Mission[]
+  Client  Client[]
 }
 
 model Site {
@@ -43,14 +44,14 @@ model Service {
 }
 
 model Worker {
-  id    Int    @id @default(autoincrement())
+  id      Int       @id @default(autoincrement())
   name    String
   tasks   Task[]
   Mission Mission[]
 }
 
 model Equipment {
-  id    Int    @id @default(autoincrement())
+  id     Int    @id @default(autoincrement())
   status String
   //tasks Task[]
 }
@@ -78,11 +79,11 @@ model Task {
 model User {
   id                  Int       @id @default(autoincrement())
   email               String    @unique
-  hashedPassword      String // <─┐
-  salt                String // <─┼─ add these lines
-  resetToken          String? // <─┤
+  hashedPassword      String       // <─┐
+  salt                String      // <─┼─ add these lines
+  resetToken          String?    // <─┤
   resetTokenExpiresAt DateTime? // <─┘
-  userId              Int // <─┐
+  userId              Int      // <─┐²
 }
 
 model Mission {
@@ -90,15 +91,20 @@ model Mission {
   status     String   @default("")
   start      DateTime @default(now())
   end        DateTime @default(now())
-  customer   Customer @relation(fields: [clientId], references: [id])
- }
+  customer   Customer @relation(fields: [customerId], references: [id])
+  customerId Int
+  Worker     Worker?  @relation(fields: [workerId], references: [id])
+  workerId   Int?
+  Client     Client[]
+}
 
 model Client {
-  id        Int      @id @default(autoincrement())
-  name      String   @default("")
-  mission   Mission  @relation(fields: [missionId], references: [id])
-  missionId Int
-  customer  Customer @relation(fields: [customerId], references: [id])
+  id         Int      @id @default(autoincrement())
+  name       String   @default("")
+  mission    Mission  @relation(fields: [missionId], references: [id])
+  missionId  Int
+  customer   Customer @relation(fields: [customerId], references: [id])
   customerId Int
-  checked   Boolean  @default(false)
+  checked    Boolean  @default(false)
 }
+

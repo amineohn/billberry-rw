@@ -25,7 +25,7 @@ export const Loading = () => <div>Loading...</div>
 export const Empty = () => {
   return (
     <div className="rw-text-center">
-      {'No missions yet. '}
+      <p>{'No missions yet. '}</p>
       <Link to={routes.newMission()} className="rw-link">
         {'Create one?'}
       </Link>

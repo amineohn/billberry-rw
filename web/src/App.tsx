@@ -12,12 +12,10 @@ import './index.css'
 const App = () => (
   <FatalErrorBoundary page={FatalErrorPage}>
     <RedwoodProvider titleTemplate="%PageTitle | %AppTitle">
-      <AuthProvider type="dbAuth">
-        <RedwoodApolloProvider>
-          <Navigation />
-          <Routes />
-        </RedwoodApolloProvider>
-      </AuthProvider>
+      <RedwoodApolloProvider>
+        <Navigation />
+        <Routes />
+      </RedwoodApolloProvider>
     </RedwoodProvider>
   </FatalErrorBoundary>
 )

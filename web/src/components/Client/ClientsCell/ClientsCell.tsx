@@ -22,11 +22,8 @@ export const Loading = () => <div>Loading...</div>
 export const Empty = () => {
   return (
     <div className="rw-text-center">
-      {'No clients yet. '}
-      <Link
-        to={routes.newClient()}
-        className="rw-link"
-      >
+      <p>{'No clients yet. '}</p>
+      <Link to={routes.newClient()} className="rw-link">
         {'Create one?'}
       </Link>
     </div>
