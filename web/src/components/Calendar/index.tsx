@@ -137,7 +137,7 @@ const Calenda = ({ tasks }: Props) => {
   )
 
   const customOnDragOver = useCallback(
-    (dragEvent: FormEvent) => {
+    (dragEvent: DragEvent) => {
       if (draggedEvent !== 'undroppable') {
         dragEvent.preventDefault()
       }
