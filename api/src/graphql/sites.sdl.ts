@@ -2,6 +2,15 @@ export const schema = gql`
   type Site {
     id: Int!
     name: String!
+    type: String!
+    commercial: String!
+    active: Boolean!
+    contact: String!
+    siret: String!
+    mail: String!
+    phone: String!
+    billingAddress: String!
+    typeofPass: String!
     tasks: [Task]!
   }
 
@@ -12,10 +21,28 @@ export const schema = gql`
 
   input CreateSiteInput {
     name: String!
+    type: String!
+    commercial: String!
+    active: Boolean!
+    contact: String!
+    siret: String!
+    mail: String!
+    phone: String!
+    billingAddress: String!
+    typeofPass: String!
   }
 
   input UpdateSiteInput {
     name: String
+    type: String
+    commercial: String
+    active: Boolean
+    contact: String
+    siret: String
+    mail: String
+    phone: String
+    billingAddress: String
+    typeofPass: String
   }
 
   type Mutation {

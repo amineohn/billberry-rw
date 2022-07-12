@@ -1,9 +1,8 @@
 import humanize from 'humanize-string'
 
-import { Link, navigate, routes } from '@redwoodjs/router'
+import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
-import { RWGqlError } from '../../../../interfaces'
 
 const DELETE_SITE_MUTATION = gql`
   mutation DeleteSiteMutation($id: Int!) {
@@ -13,50 +12,11 @@ const DELETE_SITE_MUTATION = gql`
   }
 `
 
-const formatEnum = (values: string | string[] | null | undefined) => {
-  if (values) {
-    if (Array.isArray(values)) {
-      const humanizedValues = values.map((value) => humanize(value))
-      return humanizedValues.join(', ')
-    } else {
-      return humanize(values as string)
-    }
-  }
-}
-
-const jsonDisplay = (obj) => {
-  return (
-    <pre>
-      <code>{JSON.stringify(obj, null, 2)}</code>
-    </pre>
-  )
-}
-
-const timeTag = (datetime) => {
-  return (
-    datetime && (
-      <time dateTime={datetime} title={datetime}>
-        {new Date(datetime).toUTCString()}
-      </time>
-    )
-  )
-}
-
-const checkboxInputTag = (checked) => {
+const checkboxInputTag = (checked: boolean) => {
   return <input type="checkbox" checked={checked} disabled />
 }
 
-interface Props {
-  error: RWGqlError | null
-  onSave: (data, id) => void
-  site: {
-    id: number
-    name: string
-  }
-  loading: boolean
-}
-
-const Site = ({ site }: Props) => {
+const Site = ({ site }) => {
   const [deleteSite] = useMutation(DELETE_SITE_MUTATION, {
     onCompleted: () => {
       toast.success('Site deleted')
@@ -90,6 +50,42 @@ const Site = ({ site }: Props) => {
             <tr>
               <th>Name</th>
               <td>{site.name}</td>
+            </tr>
+            <tr>
+              <th>Type</th>
+              <td>{site.type}</td>
+            </tr>
+            <tr>
+              <th>Commercial</th>
+              <td>{site.commercial}</td>
+            </tr>
+            <tr>
+              <th>Active</th>
+              <td>{checkboxInputTag(site.active)}</td>
+            </tr>
+            <tr>
+              <th>Contact</th>
+              <td>{site.contact}</td>
+            </tr>
+            <tr>
+              <th>Siret</th>
+              <td>{site.siret}</td>
+            </tr>
+            <tr>
+              <th>Mail</th>
+              <td>{site.mail}</td>
+            </tr>
+            <tr>
+              <th>Phone</th>
+              <td>{site.phone}</td>
+            </tr>
+            <tr>
+              <th>Billing address</th>
+              <td>{site.billingAddress}</td>
+            </tr>
+            <tr>
+              <th>Typeof pass</th>
+              <td>{site.typeofPass}</td>
             </tr>
           </tbody>
         </table>

@@ -15,14 +15,23 @@ model Customer {
   id      Int       @id @default(autoincrement())
   name    String
   tasks   Task[]
-  Mission Mission[]
-  Client  Client[]
+  missions Mission[]
+  clients  Client[]
 }
 
 model Site {
   id    Int    @id @default(autoincrement())
-  name  String
-  tasks Task[]
+  name    String
+  type    String
+  commercial    String
+  active    Boolean  @default(false)
+  contact    String
+  siret    String
+  mail    String
+  phone    String
+  billingAddress    String
+  typeofPass    String
+  tasks    Task[]
 }
 
 model Container {

@@ -1,7 +1,7 @@
 import type { FindSites } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
-import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
+import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 import Sites from 'src/components/Site/Sites'
 
@@ -10,6 +10,15 @@ export const QUERY = gql`
     sites {
       id
       name
+      type
+      commercial
+      active
+      contact
+      siret
+      mail
+      phone
+      billingAddress
+      typeofPass
     }
   }
 `
@@ -19,8 +28,11 @@ export const Loading = () => <div>Loading...</div>
 export const Empty = () => {
   return (
     <div className="rw-text-center">
-      <p>{'No sites yet. '}</p>
-      <Link to={routes.newSite()} className="rw-link">
+      {'No sites yet. '}
+      <Link
+        to={routes.newSite()}
+        className="rw-link"
+      >
         {'Create one?'}
       </Link>
     </div>

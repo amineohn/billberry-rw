@@ -1,4 +1,4 @@
-import { FormEvent, useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 import { CalendarIcon } from '@heroicons/react/outline'
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/solid'
@@ -150,7 +150,7 @@ const Calenda = ({ tasks }: Props) => {
       return [...prev]
     })
   }, [setEvents])
-  const formatName = (name: string, count) => `${name} ID ${count}`
+  const formatName = (name: string, count: any) => `${name} ID ${count}`
 
   const onDropFromOutside = useCallback(
     ({ start, end, allDay: isAllDay }) => {
@@ -179,9 +179,15 @@ const Calenda = ({ tasks }: Props) => {
   const handleSelectEvent = useCallback((event) => {
     navigate(routes.editTask({ id: event.id }))
   }, [])
-
+  interface Props {
+    event: {
+      id: number
+    }
+    start: string
+    end: string
+  }
   const resizeEvent = useCallback(
-    ({ event, start, end }) => {
+    ({ event, start, end }: Props) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       setEvents((prev) => {
@@ -195,7 +201,7 @@ const Calenda = ({ tasks }: Props) => {
     [setEvents]
   )
   const eventPropGetter = useCallback(
-    (event, start, end, isSelected) => ({
+    (event, start: string, end: string, isSelected: boolean) => ({
       ...(isSelected && {
         style: {
           className: '!bg-red-500',

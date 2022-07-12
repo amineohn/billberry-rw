@@ -1,5 +1,5 @@
-import { createSite, deleteSite, site, sites, updateSite } from "./sites";
-import type { StandardScenario } from "./sites.scenarios";
+import { sites, site, createSite, updateSite, deleteSite } from './sites'
+import type { StandardScenario } from './sites.scenarios'
 
 // Generated boilerplate tests do not account for all circumstances
 // and can fail without adjustments, e.g. Float and DateTime types.
@@ -22,10 +22,28 @@ describe('sites', () => {
 
   scenario('creates a site', async () => {
     const result = await createSite({
-      input: { name: 'String' },
+      input: {
+        name: 'String',
+        type: 'String',
+        commercial: 'String',
+        contact: 'String',
+        siret: 'String',
+        mail: 'String',
+        phone: 'String',
+        billingAddress: 'String',
+        typeofPass: 'String',
+      },
     })
 
     expect(result.name).toEqual('String')
+    expect(result.type).toEqual('String')
+    expect(result.commercial).toEqual('String')
+    expect(result.contact).toEqual('String')
+    expect(result.siret).toEqual('String')
+    expect(result.mail).toEqual('String')
+    expect(result.phone).toEqual('String')
+    expect(result.billingAddress).toEqual('String')
+    expect(result.typeofPass).toEqual('String')
   })
 
   scenario('updates a site', async (scenario: StandardScenario) => {

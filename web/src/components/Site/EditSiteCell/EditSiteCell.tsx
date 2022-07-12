@@ -1,7 +1,7 @@
 import type { EditSiteById } from 'types/graphql'
 
 import { navigate, routes } from '@redwoodjs/router'
-import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
+import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
@@ -12,6 +12,15 @@ export const QUERY = gql`
     site: site(id: $id) {
       id
       name
+      type
+      commercial
+      active
+      contact
+      siret
+      mail
+      phone
+      billingAddress
+      typeofPass
     }
   }
 `
@@ -20,6 +29,15 @@ const UPDATE_SITE_MUTATION = gql`
     updateSite(id: $id, input: $input) {
       id
       name
+      type
+      commercial
+      active
+      contact
+      siret
+      mail
+      phone
+      billingAddress
+      typeofPass
     }
   }
 `
