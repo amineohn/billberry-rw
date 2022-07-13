@@ -22,6 +22,7 @@ model Customer {
 model Site {
   id    Int    @id @default(autoincrement())
   name    String
+
   type    String
   commercial    String
   active    Boolean  @default(false)
@@ -88,11 +89,11 @@ model Task {
 model User {
   id                  Int       @id @default(autoincrement())
   email               String    @unique
-  hashedPassword      String       // <─┐
-  salt                String      // <─┼─ add these lines
+  hashedPassword      String     // <─┐
+  salt                String      //  ┤
   resetToken          String?    // <─┤
-  resetTokenExpiresAt DateTime? // <─┘
-  userId              Int      // <─┐²
+  resetTokenExpiresAt DateTime? //    ┤
+  userId              Int      //   <─┘
 }
 
 model Mission {

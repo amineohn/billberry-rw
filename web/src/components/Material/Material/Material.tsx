@@ -2,6 +2,8 @@ import { Link, navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import { confirmated } from 'src/utils/other'
+
 import { RWGqlError } from '../../../../interfaces'
 
 const DELETE_MATERIAL_MUTATION = gql`
@@ -11,11 +13,6 @@ const DELETE_MATERIAL_MUTATION = gql`
     }
   }
 `
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const checkboxInputTag = (checked: boolean) => {
-  return <input type="checkbox" checked={checked} disabled />
-}
-
 interface Props {
   error?: RWGqlError | null
   onSave?: (data, id) => void
@@ -38,7 +35,7 @@ const Material = ({ material }: Props) => {
   })
 
   const onDeleteClick = (id: number) => {
-    if (confirm('Are you sure you want to delete material ' + id + '?')) {
+    if (confirmated('material', 'delete', id)) {
       deleteMaterial({ variables: { id } }).then((r) => console.log(r))
     }
   }

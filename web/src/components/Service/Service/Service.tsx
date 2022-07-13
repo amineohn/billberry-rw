@@ -2,6 +2,8 @@ import { Link, navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import { confirmated } from 'src/utils/other'
+
 import { RWGqlError } from '../../../../interfaces'
 
 const DELETE_SERVICE_MUTATION = gql`
@@ -34,7 +36,7 @@ const Service = ({ service }: Props) => {
   })
 
   const onDeleteClick = (id) => {
-    if (confirm('Are you sure you want to delete service ' + id + '?')) {
+    if (confirmated('service', 'delete', id)) {
       deleteService({ variables: { id } }).then((r) => console.log(r))
     }
   }

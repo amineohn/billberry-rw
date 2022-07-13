@@ -1,8 +1,7 @@
-import humanize from 'humanize-string'
-
 import { Link, navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
+import { confirmated, timeTag } from 'src/utils/other'
 
 const DELETE_MISSION_MUTATION = gql`
   mutation DeleteMissionMutation($id: Int!) {
@@ -11,19 +10,6 @@ const DELETE_MISSION_MUTATION = gql`
     }
   }
 `
-const timeTag = (datetime: string) => {
-  return (
-    datetime && (
-      <time dateTime={datetime} title={datetime}>
-        {new Date(datetime).toUTCString()}
-      </time>
-    )
-  )
-}
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const checkboxInputTag = (checked: boolean) => {
-  return <input type="checkbox" checked={checked} disabled />
-}
 
 interface Props {
   mission: {
@@ -48,7 +34,7 @@ const Mission = ({ mission }: Props) => {
   })
 
   const onDeleteClick = (id: number) => {
-    if (confirm('Are you sure you want to delete mission ' + id + '?')) {
+    if (confirmated('mission', 'delete', id)) {
       deleteMission({ variables: { id } }).then((r) => console.log(r))
     }
   }

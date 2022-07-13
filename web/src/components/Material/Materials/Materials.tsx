@@ -3,6 +3,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Material/MaterialsCell'
+import { confirmated } from 'src/utils/other'
 
 const DELETE_MATERIAL_MUTATION = gql`
   mutation DeleteMaterialMutation($id: Int!) {
@@ -20,9 +21,6 @@ const truncate = (text) => {
     output = output.substring(0, MAX_STRING_LENGTH) + '...'
   }
   return output
-}
-const checkboxInputTag = (checked) => {
-  return <input type="checkbox" checked={checked} disabled />
 }
 
 interface Props {
@@ -46,7 +44,7 @@ const MaterialsList = ({ materials }) => {
   })
 
   const onDeleteClick = (id) => {
-    if (confirm('Are you sure you want to delete material ' + id + '?')) {
+    if (confirmated('material', 'delete', id)) {
       deleteMaterial({ variables: { id } })
     }
   }

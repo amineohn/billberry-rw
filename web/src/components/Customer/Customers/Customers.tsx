@@ -3,6 +3,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Customer/CustomersCell'
+import { confirmated } from 'src/utils/other'
 
 import { RWGqlError } from '../../../../interfaces'
 
@@ -22,10 +23,6 @@ const truncate = (text) => {
     output = output.substring(0, MAX_STRING_LENGTH) + '...'
   }
   return output
-}
-
-const checkboxInputTag = (checked) => {
-  return <input type="checkbox" checked={checked} disabled />
 }
 
 interface Props {
@@ -51,7 +48,7 @@ const CustomersList = ({ customers }) => {
   })
 
   const onDeleteClick = (id) => {
-    if (confirm('Are you sure you want to delete customer ' + id + '?')) {
+    if (confirmated('customer', 'delete', id)) {
       deleteCustomer({ variables: { id } })
     }
   }

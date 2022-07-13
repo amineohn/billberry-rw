@@ -1,8 +1,8 @@
-import humanize from 'humanize-string'
-
 import { Link, navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
+
+import { confirmated } from 'src/utils/other'
 
 const DELETE_CUSTOMER_MUTATION = gql`
   mutation DeleteCustomerMutation($id: Int!) {
@@ -11,10 +11,6 @@ const DELETE_CUSTOMER_MUTATION = gql`
     }
   }
 `
-
-const checkboxInputTag = (checked) => {
-  return <input type="checkbox" checked={checked} disabled />
-}
 
 const Customer = ({ customer }) => {
   const [deleteCustomer] = useMutation(DELETE_CUSTOMER_MUTATION, {
@@ -28,7 +24,7 @@ const Customer = ({ customer }) => {
   })
 
   const onDeleteClick = (id) => {
-    if (confirm('Are you sure you want to delete customer ' + id + '?')) {
+    if (confirmated('customer', 'delete', id)) {
       deleteCustomer({ variables: { id } })
     }
   }

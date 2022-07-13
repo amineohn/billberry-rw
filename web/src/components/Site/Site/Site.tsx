@@ -1,8 +1,9 @@
-import humanize from 'humanize-string'
-
 import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
+
+import { checkboxInputTag, confirmated } from 'src/utils/other'
+import { SiteProps } from '../../../../interfaces'
 
 const DELETE_SITE_MUTATION = gql`
   mutation DeleteSiteMutation($id: Int!) {
@@ -11,12 +12,7 @@ const DELETE_SITE_MUTATION = gql`
     }
   }
 `
-
-const checkboxInputTag = (checked: boolean) => {
-  return <input type="checkbox" checked={checked} disabled />
-}
-
-const Site = ({ site }) => {
+const Site = ({ site }: SiteProps) => {
   const [deleteSite] = useMutation(DELETE_SITE_MUTATION, {
     onCompleted: () => {
       toast.success('Site deleted')
@@ -27,8 +23,8 @@ const Site = ({ site }) => {
     },
   })
 
-  const onDeleteClick = (id) => {
-    if (confirm('Are you sure you want to delete site ' + id + '?')) {
+  const onDeleteClick = (id: number) => {
+    if (confirmated('site', 'delete', id)) {
       deleteSite({ variables: { id } })
     }
   }
@@ -42,7 +38,7 @@ const Site = ({ site }) => {
           </h2>
         </header>
         <table className="rw-table">
-          <tbody>
+          <tbody key={site.id}>
             <tr>
               <th>Id</th>
               <td>{site.id}</td>
@@ -69,7 +65,7 @@ const Site = ({ site }) => {
             </tr>
             <tr>
               <th>Siret</th>
-              <td>{site.siret}</td>
+              <td>{site.checkSiret(site.siret)}</td>
             </tr>
             <tr>
               <th>Mail</th>

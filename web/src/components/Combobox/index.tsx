@@ -3,22 +3,9 @@ import { Fragment, useState } from 'react'
 import { Combobox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
 
-interface Props {
-  data: string[]
-  query: string
-  onChange: () => void
-  setQuery: (query: string) => void
-  placeholder?: string
-  value?: string
-}
+import { ComboboxProps, DataProps } from '../../../interfaces'
 
-interface Data {
-  id: number
-  value: string
-  name: string
-}
-
-const Combo = ({ data, query, onChange, setQuery }: Props) => {
+const Combo = ({ data, query, onChange, setQuery }: ComboboxProps) => {
   const [selected, setSelected] = useState(data)
 
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -42,7 +29,7 @@ const Combo = ({ data, query, onChange, setQuery }: Props) => {
           <div className="relative w-full cursor-default overflow-hidden rounded-lg bg-white text-left shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-teal-300 sm:text-sm">
             <Combobox.Input
               className="w-full border-none py-2 pl-3 pr-10 text-sm leading-5 text-gray-900 focus:ring-0"
-              displayValue={(data: Data) => data.name}
+              displayValue={(data: DataProps) => data.name}
               onChange={onChange}
             />
             <Combobox.Button className="absolute inset-y-0 right-0 flex items-center pr-2">

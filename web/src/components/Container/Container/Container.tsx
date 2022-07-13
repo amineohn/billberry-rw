@@ -1,8 +1,10 @@
-import humanize from 'humanize-string'
-
 import { Link, navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
+
+import { ContainerProps } from '../../../../interfaces'
+
+import { confirmated } from 'src/utils/other'
 
 const DELETE_CONTAINER_MUTATION = gql`
   mutation DeleteContainerMutation($id: Int!) {
@@ -12,18 +14,7 @@ const DELETE_CONTAINER_MUTATION = gql`
   }
 `
 
-const checkboxInputTag = (checked) => {
-  return <input type="checkbox" checked={checked} disabled />
-}
-
-interface Props {
-  container: {
-    id: number
-    name: string
-  }
-}
-
-const Container = ({ container }: Props) => {
+const Container = ({ container }: ContainerProps) => {
   const [deleteContainer] = useMutation(DELETE_CONTAINER_MUTATION, {
     onCompleted: () => {
       toast.success('Container deleted')
@@ -35,7 +26,7 @@ const Container = ({ container }: Props) => {
   })
 
   const onDeleteClick = (id) => {
-    if (confirm('Are you sure you want to delete container ' + id + '?')) {
+    if (confirmated('container', 'delete', id)) {
       deleteContainer({ variables: { id } })
     }
   }

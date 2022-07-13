@@ -3,6 +3,7 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Equipment/EquimentCell'
+import { confirmated } from 'src/utils/other'
 
 const DELETE_EQUIPMENT_MUTATION = gql`
   mutation DeleteEquipmentMutation($id: Int!) {
@@ -22,11 +23,6 @@ const truncate = (text) => {
   return output
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const checkboxInputTag = (checked: boolean) => {
-  return <input type="checkbox" checked={checked} disabled />
-}
-
 const EquimentList = ({ equiment }) => {
   const [deleteEquipment] = useMutation(DELETE_EQUIPMENT_MUTATION, {
     onCompleted: () => {
@@ -43,7 +39,7 @@ const EquimentList = ({ equiment }) => {
   })
 
   const onDeleteClick = (id: number) => {
-    if (confirm('Are you sure you want to delete equipment ' + id + '?')) {
+    if (confirmated('equipment', 'delete', id)) {
       deleteEquipment({ variables: { id } }).then((r) => console.log(r))
     }
   }

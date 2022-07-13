@@ -2,6 +2,8 @@ import { Link, navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
+import { confirmated } from 'src/utils/other'
+
 const DELETE_EQUIPMENT_MUTATION = gql`
   mutation DeleteEquipmentMutation($id: Int!) {
     deleteEquipment(id: $id) {
@@ -22,7 +24,7 @@ const Equipment = ({ equipment }) => {
   })
 
   const onDeleteClick = (id) => {
-    if (confirm('Are you sure you want to delete equipment ' + id + '?')) {
+    if (confirmated('equipment', 'delete', id)) {
       deleteEquipment({ variables: { id } }).then((r) => console.log(r))
     }
   }

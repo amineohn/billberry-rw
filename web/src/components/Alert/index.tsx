@@ -1,15 +1,8 @@
-import { Fragment, ReactNode } from 'react'
+import { Fragment } from 'react'
 
 import { Dialog, Transition } from '@headlessui/react'
 
-interface Props {
-  title: string
-  content: ReactNode
-  type: 'button' | 'submit'
-  buttonText?: string
-  isOpen: boolean
-  closeModal: () => void
-}
+import { AlertProps } from '../../../interfaces'
 
 const Alert = ({
   title,
@@ -18,7 +11,7 @@ const Alert = ({
   buttonText,
   isOpen,
   closeModal,
-}: Props) => {
+}: AlertProps) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={closeModal}>

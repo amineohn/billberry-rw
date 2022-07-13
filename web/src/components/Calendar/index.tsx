@@ -13,44 +13,9 @@ import { toast } from '@redwoodjs/web/toast'
 import { EDIT_TASK_QUERY } from 'src/components/Task/Tasks/Tasks'
 
 import MyEvent from '../Events'
+import { CalendarProps, EventProps } from '../../../interfaces'
 
-interface Props {
-  tasks: [
-    {
-      id: number
-      plannedAt: string
-      workerId: number
-      customerId: number
-      siteId: number
-      containerId: number
-      serviceId: number
-      equipmentId: number
-      materialId: number
-      worker: {
-        name: string
-      }
-      customer: {
-        name: string
-      }
-      site: {
-        name: string
-      }
-      service: {
-        name: string
-      }
-      container: {
-        name: string
-      }
-      material: {
-        name: string
-      }
-      start: string
-      end: string
-    }
-  ]
-}
-
-const Calenda = ({ tasks }: Props) => {
+const Calenda = ({ tasks }: CalendarProps) => {
   const formatDate = (startTime: string) => {
     const time = new Date(startTime)
     const date = new Date(time.setHours(time.getHours()))
@@ -179,15 +144,8 @@ const Calenda = ({ tasks }: Props) => {
   const handleSelectEvent = useCallback((event) => {
     navigate(routes.editTask({ id: event.id }))
   }, [])
-  interface Props {
-    event: {
-      id: number
-    }
-    start: string
-    end: string
-  }
   const resizeEvent = useCallback(
-    ({ event, start, end }: Props) => {
+    ({ event, start, end }: EventProps) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       setEvents((prev) => {
