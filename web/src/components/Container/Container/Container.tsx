@@ -2,9 +2,9 @@ import { Link, navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
-import { ContainerProps } from '../../../../interfaces'
-
 import { confirmated } from 'src/utils/other'
+
+import { ContainerProps } from '../../../../interfaces'
 
 const DELETE_CONTAINER_MUTATION = gql`
   mutation DeleteContainerMutation($id: Int!) {
@@ -25,9 +25,9 @@ const Container = ({ container }: ContainerProps) => {
     },
   })
 
-  const onDeleteClick = (id) => {
+  const onDeleteClick = (id: number) => {
     if (confirmated('container', 'delete', id)) {
-      deleteContainer({ variables: { id } })
+      deleteContainer({ variables: { id } }).then((r) => console.log(r))
     }
   }
 

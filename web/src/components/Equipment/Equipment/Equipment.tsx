@@ -23,7 +23,7 @@ const Equipment = ({ equipment }) => {
     },
   })
 
-  const onDeleteClick = (id) => {
+  const onDeleteClick = (id: number) => {
     if (confirmated('equipment', 'delete', id)) {
       deleteEquipment({ variables: { id } }).then((r) => console.log(r))
     }

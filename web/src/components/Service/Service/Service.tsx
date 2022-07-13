@@ -35,7 +35,7 @@ const Service = ({ service }: Props) => {
     },
   })
 
-  const onDeleteClick = (id) => {
+  const onDeleteClick = (id: number) => {
     if (confirmated('service', 'delete', id)) {
       deleteService({ variables: { id } }).then((r) => console.log(r))
     }

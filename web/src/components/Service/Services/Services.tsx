@@ -49,9 +49,9 @@ const ServicesList = ({ services }) => {
     awaitRefetchQueries: true,
   })
 
-  const onDeleteClick = (id) => {
+  const onDeleteClick = (id: number) => {
     if (confirmated('service', 'delete', id)) {
-      deleteService({ variables: { id } })
+      deleteService({ variables: { id } }).then((r) => console.log(r))
     }
   }
 

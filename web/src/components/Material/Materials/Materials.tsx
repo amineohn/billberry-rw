@@ -43,9 +43,9 @@ const MaterialsList = ({ materials }) => {
     awaitRefetchQueries: true,
   })
 
-  const onDeleteClick = (id) => {
+  const onDeleteClick = (id: number) => {
     if (confirmated('material', 'delete', id)) {
-      deleteMaterial({ variables: { id } })
+      deleteMaterial({ variables: { id } }).then((r) => console.log(r))
     }
   }
 

@@ -40,7 +40,7 @@ const ClientsList = ({ clients }) => {
 
   const onDeleteClick = (id: number) => {
     if (confirmated('client', 'delete', id)) {
-      deleteClient({ variables: { id } })
+      deleteClient({ variables: { id } }).then((r) => console.log(r))
     }
   }
 

@@ -40,7 +40,7 @@ const SitesList = ({ sites }) => {
 
   const onDeleteClick = (id: number) => {
     if (confirmated('site', 'delete', id)) {
-      deleteSite({ variables: { id } })
+      deleteSite({ variables: { id } }).then((r) => console.log(r))
     }
   }
 

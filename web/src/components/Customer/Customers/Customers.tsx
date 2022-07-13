@@ -47,9 +47,9 @@ const CustomersList = ({ customers }) => {
     awaitRefetchQueries: true,
   })
 
-  const onDeleteClick = (id) => {
+  const onDeleteClick = (id: number) => {
     if (confirmated('customer', 'delete', id)) {
-      deleteCustomer({ variables: { id } })
+      deleteCustomer({ variables: { id } }).then((r) => console.log(r))
     }
   }
 

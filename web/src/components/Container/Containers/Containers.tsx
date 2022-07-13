@@ -76,7 +76,7 @@ const ContainersList = ({ containers }) => {
 
   const onDeleteClick = (id: number) => {
     if (confirmated('container', 'delete', id)) {
-      deleteContainer({ variables: { id } })
+      deleteContainer({ variables: { id } }).then((r) => console.log(r))
     }
   }
 

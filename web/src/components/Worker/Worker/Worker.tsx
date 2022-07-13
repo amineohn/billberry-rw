@@ -35,9 +35,9 @@ const Worker = ({ worker }: Props) => {
     },
   })
 
-  const onDeleteClick = (id) => {
+  const onDeleteClick = (id: number) => {
     if (confirmated('worker', 'delete', id)) {
-      deleteWorker({ variables: { id } })
+      deleteWorker({ variables: { id } }).then((r) => console.log(r))
     }
   }
 

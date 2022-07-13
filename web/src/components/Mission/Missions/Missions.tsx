@@ -38,7 +38,7 @@ const MissionsList = ({ missions }) => {
     awaitRefetchQueries: true,
   })
 
-  const onDeleteClick = (id) => {
+  const onDeleteClick = (id: number) => {
     if (confirmated('mission', 'delete', id)) {
       deleteMission({ variables: { id } })
     }
