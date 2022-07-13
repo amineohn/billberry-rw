@@ -1,5 +1,3 @@
-import humanize from 'humanize-string'
-
 export const jsonDisplay = (
   value: any,
   replacer?: (this: any, key: string, value: any) => any,
@@ -12,22 +10,12 @@ export const jsonDisplay = (
   )
 }
 
-export const formatEnum = (values: string | string[] | null | undefined) => {
-  if (values) {
-    if (Array.isArray(values)) {
-      const humanizedValues = values.map((value) => humanize(value))
-      return humanizedValues.join(', ')
-    } else {
-      return humanize(values as string)
-    }
-  }
-}
-
-export const timeTag = (datetime: string) => {
+export const timeTag = (dateTime: string) => {
+  const date = new Date(dateTime).toUTCString()
   return (
-    datetime && (
-      <time dateTime={datetime} title={datetime}>
-        {new Date(datetime).toUTCString()}
+    dateTime && (
+      <time dateTime={dateTime} title={dateTime}>
+        {date}
       </time>
     )
   )
