@@ -5,21 +5,41 @@ export default () => {
     return navigate(to) as void as any
   }
   const urlExists = (): boolean => {
+    enum Status {
+      PAGENOTFOUND = 404,
+      FOUND = 200,
+      ERROR_SERVER = 500,
+      BAD_REQUEST = 400,
+      UNAUTHORIZED = 401,
+    }
     const http = new XMLHttpRequest()
     http.open('HEAD', navigateThisOne('/'), false)
     http.send()
-    switch (http.status) {
-      case 200:
+
+    for (const key in Status) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      if (http.status === Status[key].toUpperCase()) {
         return true
-      case 404:
-        return false
-      default:
-        return true
+      }
+      switch (http.status) {
+        case Status.FOUND:
+          return true
+        case Status.PAGENOTFOUND:
+          return false
+        case Status.ERROR_SERVER:
+          return false
+        case Status.BAD_REQUEST:
+          return false
+        case Status.UNAUTHORIZED:
+          return false
+        default:
+          return true
+      }
     }
     return false
   }
   if (!urlExists()) {
-    // back to current page
     navigate('/')
   }
   return (
