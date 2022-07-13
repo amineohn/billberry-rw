@@ -16,26 +16,19 @@ export default () => {
     http.open('HEAD', navigateThisOne('/'), false)
     http.send()
 
-    for (const key in Status) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
-      if (http.status === Status[key].toUpperCase()) {
+    switch (http.status) {
+      case Status.FOUND:
         return true
-      }
-      switch (http.status) {
-        case Status.FOUND:
-          return true
-        case Status.PAGENOTFOUND:
-          return false
-        case Status.ERROR_SERVER:
-          return false
-        case Status.BAD_REQUEST:
-          return false
-        case Status.UNAUTHORIZED:
-          return false
-        default:
-          return true
-      }
+      case Status.PAGENOTFOUND:
+        return false
+      case Status.ERROR_SERVER:
+        return false
+      case Status.BAD_REQUEST:
+        return false
+      case Status.UNAUTHORIZED:
+        return false
+      default:
+        return true
     }
     return false
   }
