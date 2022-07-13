@@ -5,9 +5,10 @@ import { BellIcon, MenuIcon, XIcon } from '@heroicons/react/outline'
 
 import { Link } from '@redwoodjs/router'
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
+
 const Navigation = () => {
   const navigation = [
     {

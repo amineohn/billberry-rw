@@ -1,7 +1,7 @@
 import type { FindCustomers } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 
 import Customers from 'src/components/Customer/Customers'
 
@@ -19,11 +19,8 @@ export const Loading = () => <div>Loading...</div>
 export const Empty = () => {
   return (
     <div className="rw-text-center">
-      {'No customers yet. '}
-      <Link
-        to={routes.newCustomer()}
-        className="rw-link"
-      >
+      <p>{'No customers yet. '}</p>
+      <Link to={routes.newCustomer()} className="rw-link">
         {'Create one?'}
       </Link>
     </div>

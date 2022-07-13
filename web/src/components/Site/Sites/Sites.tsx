@@ -5,7 +5,6 @@ import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Site/SitesCell'
-import { RWGqlError } from '../../../../interfaces'
 
 const DELETE_SITE_MUTATION = gql`
   mutation DeleteSiteMutation($id: Int!) {
@@ -53,13 +52,7 @@ const timeTag = (datetime) => {
 const checkboxInputTag = (checked) => {
   return <input type="checkbox" checked={checked} disabled />
 }
-interface Props {
-  error: RWGqlError | null
-  onSave: (data, id) => void
-  id: number
-  name: string
-  loading: boolean
-}
+
 const SitesList = ({ sites }) => {
   const [deleteSite] = useMutation(DELETE_SITE_MUTATION, {
     onCompleted: () => {
@@ -88,14 +81,32 @@ const SitesList = ({ sites }) => {
           <tr>
             <th>Id</th>
             <th>Name</th>
+            <th>Type</th>
+            <th>Commercial</th>
+            <th>Active</th>
+            <th>Contact</th>
+            <th>Siret</th>
+            <th>Mail</th>
+            <th>Phone</th>
+            <th>Billing address</th>
+            <th>Typeof pass</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
         <tbody>
-          {sites.map((site: Props) => (
+          {sites.map((site) => (
             <tr key={site.id}>
               <td>{truncate(site.id)}</td>
               <td>{truncate(site.name)}</td>
+              <td>{truncate(site.type)}</td>
+              <td>{truncate(site.commercial)}</td>
+              <td>{checkboxInputTag(site.active)}</td>
+              <td>{truncate(site.contact)}</td>
+              <td>{truncate(site.siret)}</td>
+              <td>{truncate(site.mail)}</td>
+              <td>{truncate(site.phone)}</td>
+              <td>{truncate(site.billingAddress)}</td>
+              <td>{truncate(site.typeofPass)}</td>
               <td>
                 <nav className="rw-table-actions">
                   <Link

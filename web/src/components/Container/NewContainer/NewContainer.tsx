@@ -13,15 +13,18 @@ const CREATE_CONTAINER_MUTATION = gql`
 `
 
 const NewContainer = () => {
-  const [createContainer, { loading, error }] = useMutation(CREATE_CONTAINER_MUTATION, {
-    onCompleted: () => {
-      toast.success('Container created')
-      navigate(routes.containers())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
+  const [createContainer, { loading, error }] = useMutation(
+    CREATE_CONTAINER_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Container created')
+        navigate(routes.containers())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
 
   const onSave = (input) => {
     createContainer({ variables: { input } })

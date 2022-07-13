@@ -1,7 +1,7 @@
 import type { FindMaterials } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 
 import Materials from 'src/components/Material/Materials'
 
@@ -19,11 +19,8 @@ export const Loading = () => <div>Loading...</div>
 export const Empty = () => {
   return (
     <div className="rw-text-center">
-      {'No materials yet. '}
-      <Link
-        to={routes.newMaterial()}
-        className="rw-link"
-      >
+      <p>{'No materials yet. '}</p>
+      <Link to={routes.newMaterial()} className="rw-link">
         {'Create one?'}
       </Link>
     </div>

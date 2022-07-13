@@ -1,11 +1,5 @@
-import {
-  customers,
-  customer,
-  createCustomer,
-  updateCustomer,
-  deleteCustomer,
-} from './customers'
-import type { StandardScenario } from './customers.scenarios'
+import { createCustomer, customer, customers, deleteCustomer, updateCustomer } from "./customers";
+import type { StandardScenario } from "./customers.scenarios";
 
 // Generated boilerplate tests do not account for all circumstances
 // and can fail without adjustments, e.g. Float and DateTime types.

@@ -1,5 +1,6 @@
-import { db } from 'src/lib/db'
 import { DbAuthHandler } from '@redwoodjs/api'
+
+import { db } from 'src/lib/db'
 
 export const handler = async (event, context) => {
   const forgotPasswordOptions = {
@@ -85,6 +86,15 @@ export const handler = async (event, context) => {
     },
   }
 
+  interface HandlerProps {
+    id: number
+    username: string
+    hashedPassword: string
+    salt: string
+    userAttributes: {
+      name: string
+    }
+  }
   const signupOptions = {
     // Whatever you want to happen to your data on new user signup. Redwood will
     // check for duplicate usernames before calling this handler. At a minimum
@@ -101,7 +111,12 @@ export const handler = async (event, context) => {
     //
     // If this returns anything else, it will be returned by the
     // `signUp()` function in the form of: `{ message: 'String here' }`.
-    handler: ({ username, hashedPassword, salt, userAttributes }) => {
+    handler: ({
+      username,
+      hashedPassword,
+      salt,
+      userAttributes,
+    }: HandlerProps) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       return db.user.create({

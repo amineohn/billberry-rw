@@ -1,4 +1,4 @@
-import { useCallback, useState, useMemo } from 'react'
+import { useCallback, useMemo, useState } from 'react'
 
 import { CalendarIcon } from '@heroicons/react/outline'
 import { ArrowLeftIcon, ArrowRightIcon } from '@heroicons/react/solid'
@@ -13,6 +13,7 @@ import { toast } from '@redwoodjs/web/toast'
 import { EDIT_TASK_QUERY } from 'src/components/Task/Tasks/Tasks'
 
 import MyEvent from '../Events'
+
 interface Props {
   tasks: [
     {
@@ -48,6 +49,7 @@ interface Props {
     }
   ]
 }
+
 const Calenda = ({ tasks }: Props) => {
   const formatDate = (startTime: string) => {
     const time = new Date(startTime)
@@ -84,8 +86,8 @@ const Calenda = ({ tasks }: Props) => {
   ) => {
     const castInput = Object.assign(input, {
       id: input.id,
-      start: formatDate(input.start),
-      end: formatDate(input.end),
+      start: formatDate(input.start || ''),
+      end: formatDate(input.end || ''),
     })
     updateTask({ variables: { id, input: castInput } }).then((r) =>
       console.log(r)
@@ -94,7 +96,7 @@ const Calenda = ({ tasks }: Props) => {
   // fonctionne bien avec des données en dur mais pas avec les données de la base
   const lycos = tasks.map((task) => {
     return {
-      id: task.id,
+      id: task?.id,
       title: task.worker?.name,
       serviceName: task.service?.name,
       customerName: task.customer?.name,
@@ -102,8 +104,8 @@ const Calenda = ({ tasks }: Props) => {
       containerName: task.container?.name,
       materialName: task.material?.name,
       workerName: task.worker?.name,
-      start: task.start,
-      end: task.end,
+      start: task?.start,
+      end: task?.end,
     }
   })
   const [events, setEvents] = useState(lycos)
@@ -135,7 +137,7 @@ const Calenda = ({ tasks }: Props) => {
   )
 
   const customOnDragOver = useCallback(
-    (dragEvent) => {
+    (dragEvent: DragEvent) => {
       if (draggedEvent !== 'undroppable') {
         dragEvent.preventDefault()
       }
@@ -148,7 +150,7 @@ const Calenda = ({ tasks }: Props) => {
       return [...prev]
     })
   }, [setEvents])
-  const formatName = (name: string, count) => `${name} ID ${count}`
+  const formatName = (name: string, count: any) => `${name} ID ${count}`
 
   const onDropFromOutside = useCallback(
     ({ start, end, allDay: isAllDay }) => {
@@ -177,9 +179,15 @@ const Calenda = ({ tasks }: Props) => {
   const handleSelectEvent = useCallback((event) => {
     navigate(routes.editTask({ id: event.id }))
   }, [])
-
+  interface Props {
+    event: {
+      id: number
+    }
+    start: string
+    end: string
+  }
   const resizeEvent = useCallback(
-    ({ event, start, end }) => {
+    ({ event, start, end }: Props) => {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       setEvents((prev) => {
@@ -193,7 +201,7 @@ const Calenda = ({ tasks }: Props) => {
     [setEvents]
   )
   const eventPropGetter = useCallback(
-    (event, start, end, isSelected) => ({
+    (event, start: string, end: string, isSelected: boolean) => ({
       ...(isSelected && {
         style: {
           className: '!bg-red-500',
@@ -205,12 +213,25 @@ const Calenda = ({ tasks }: Props) => {
   const dayPropGetter = useCallback(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     (date: Date) => ({
-      /*...(moment(date).day() === 2 && {
+      /*...(moment(date).day() === 1 && {
+        className: '!bg-sky-500/50',
+      }),
+      ...(moment(date).day() === 2 && {
+        className: '!bg-green-500/50',
+      }),
+      ...(moment(date).day() === 3 && {
         className: '!bg-yellow-500/50',
+      }),
+      ...(moment(date).day() === 4 && {
+        className: '!bg-purple-500/50',
+      }),
+      ...(moment(date).day() === 5 && {
+        className: '!bg-blue-500/50',
       }),*/
     }),
     []
   )
+
   // eslint-disable-next-line react-hooks/exhaustive-deps,@typescript-eslint/ban-ts-comment
   // @ts-ignore
   const components = useMemo(() => ({
@@ -233,7 +254,7 @@ const Calenda = ({ tasks }: Props) => {
         onEventResize={resizeEvent}
         eventPropGetter={eventPropGetter}
         onSelectEvent={handleSelectEvent}
-        resizable={true}
+        resizable
         onSelectSlot={newEvent}
         messages={{
           next: <ArrowRightIcon className="w-5 h-5" />,
@@ -254,6 +275,7 @@ const Calenda = ({ tasks }: Props) => {
         dayPropGetter={dayPropGetter}
         components={components}
         popup={true}
+        toolbar={true}
       />
     </>
   )

@@ -1,11 +1,5 @@
-import {
-  equiment,
-  equipment,
-  createEquipment,
-  updateEquipment,
-  deleteEquipment,
-} from './equiment'
-import type { StandardScenario } from './equiment.scenarios'
+import { createEquipment, deleteEquipment, equiment, equipment, updateEquipment } from "./equiment";
+import type { StandardScenario } from "./equiment.scenarios";
 
 // Generated boilerplate tests do not account for all circumstances
 // and can fail without adjustments, e.g. Float and DateTime types.

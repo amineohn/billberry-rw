@@ -13,15 +13,18 @@ const CREATE_SERVICE_MUTATION = gql`
 `
 
 const NewService = () => {
-  const [createService, { loading, error }] = useMutation(CREATE_SERVICE_MUTATION, {
-    onCompleted: () => {
-      toast.success('Service created')
-      navigate(routes.services())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
+  const [createService, { loading, error }] = useMutation(
+    CREATE_SERVICE_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Service created')
+        navigate(routes.services())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
 
   const onSave = (input) => {
     createService({ variables: { input } })

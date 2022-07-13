@@ -9,6 +9,15 @@ export const QUERY = gql`
     site: site(id: $id) {
       id
       name
+      type
+      commercial
+      active
+      contact
+      siret
+      mail
+      phone
+      billingAddress
+      typeofPass
     }
   }
 `

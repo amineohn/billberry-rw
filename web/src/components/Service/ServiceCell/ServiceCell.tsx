@@ -1,6 +1,6 @@
 import type { FindServiceById } from 'types/graphql'
 
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 
 import Service from 'src/components/Service/Service'
 

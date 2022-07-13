@@ -1,4 +1,5 @@
 import { AuthenticationError, ForbiddenError } from '@redwoodjs/graphql-server'
+
 import { db } from './db'
 
 /**
@@ -48,6 +49,11 @@ type AllowedRoles = string | string[] | undefined
  * @returns {boolean} - Returns true if the currentUser is logged in and assigned one of the given roles,
  * or when no roles are provided to check against. Otherwise returns false.
  */
+interface Props {
+  currentUser: {
+    roles: string[]
+  }
+}
 export const hasRole = (roles: AllowedRoles): boolean => {
   if (!isAuthenticated()) {
     return false
@@ -97,12 +103,4 @@ export const hasRole = (roles: AllowedRoles): boolean => {
  *
  * @see https://github.com/redwoodjs/redwood/tree/main/packages/auth for examples
  */
-export const requireAuth = ({ roles }: { roles: AllowedRoles }) => {
-  if (!isAuthenticated()) {
-    throw new AuthenticationError("You don't have permission to do that.")
-  }
-
-  if (roles && !hasRole(roles)) {
-    throw new ForbiddenError("You don't have access to do that.")
-  }
-}
+export const requireAuth = ({ roles }: { roles: AllowedRoles }) => {}

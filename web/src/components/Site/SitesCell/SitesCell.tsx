@@ -10,6 +10,15 @@ export const QUERY = gql`
     sites {
       id
       name
+      type
+      commercial
+      active
+      contact
+      siret
+      mail
+      phone
+      billingAddress
+      typeofPass
     }
   }
 `

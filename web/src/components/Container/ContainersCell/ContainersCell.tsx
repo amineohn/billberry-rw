@@ -1,7 +1,7 @@
 import type { FindContainers } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 
 import Containers from 'src/components/Container/Containers'
 
@@ -19,11 +19,8 @@ export const Loading = () => <div>Loading...</div>
 export const Empty = () => {
   return (
     <div className="rw-text-center">
-      {'No containers yet. '}
-      <Link
-        to={routes.newContainer()}
-        className="rw-link"
-      >
+      <p>{'No containers yet. '}</p>
+      <Link to={routes.newContainer()} className="rw-link">
         {'Create one?'}
       </Link>
     </div>

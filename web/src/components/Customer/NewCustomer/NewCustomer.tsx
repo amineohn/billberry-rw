@@ -13,15 +13,18 @@ const CREATE_CUSTOMER_MUTATION = gql`
 `
 
 const NewCustomer = () => {
-  const [createCustomer, { loading, error }] = useMutation(CREATE_CUSTOMER_MUTATION, {
-    onCompleted: () => {
-      toast.success('Customer created')
-      navigate(routes.customers())
-    },
-    onError: (error) => {
-      toast.error(error.message)
-    },
-  })
+  const [createCustomer, { loading, error }] = useMutation(
+    CREATE_CUSTOMER_MUTATION,
+    {
+      onCompleted: () => {
+        toast.success('Customer created')
+        navigate(routes.customers())
+      },
+      onError: (error) => {
+        toast.error(error.message)
+      },
+    }
+  )
 
   const onSave = (input) => {
     createCustomer({ variables: { input } })

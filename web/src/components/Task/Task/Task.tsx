@@ -1,6 +1,6 @@
 import humanize from 'humanize-string'
 
-import { Link, routes, navigate } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
@@ -14,6 +14,7 @@ const DELETE_TASK_MUTATION = gql`
   }
 `
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const formatEnum = (values: string | string[] | null | undefined) => {
   if (values) {
     if (Array.isArray(values)) {
@@ -25,6 +26,7 @@ const formatEnum = (values: string | string[] | null | undefined) => {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const jsonDisplay = (obj) => {
   return (
     <pre>
@@ -33,23 +35,27 @@ const jsonDisplay = (obj) => {
   )
 }
 
-const timeTag = (datetime) => {
+const timeTag = (datetime: string) => {
+  //const dayAndNight = datetime.split('T')[1].split(':')[0]
+  const dayAndNight = new Date(datetime).toUTCString()
   return (
     datetime && (
       <time dateTime={datetime} title={datetime}>
-        {new Date(datetime).toUTCString()}
+        {dayAndNight}
       </time>
     )
   )
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const checkboxInputTag = (checked) => {
   return <input type="checkbox" checked={checked} disabled />
 }
+
 interface Props {
   error: RWGqlError | null
   onSave: (data, id) => void
-  task: {
+  task?: {
     workerId: number
     customerId: number
     siteId: number
@@ -58,9 +64,12 @@ interface Props {
     serviceId: number
     plannedAt: string
     id: number
+    start: string
+    end: string
   }
   loading: boolean
 }
+
 const Task = ({ task }: Props) => {
   const [deleteTask] = useMutation(DELETE_TASK_MUTATION, {
     onCompleted: () => {
@@ -72,14 +81,15 @@ const Task = ({ task }: Props) => {
     },
   })
 
-  const onDeleteClick = (id) => {
+  const onDeleteClick = (id: number) => {
     if (confirm('Are you sure you want to delete task ' + id + '?')) {
-      deleteTask({ variables: { id } })
+      deleteTask({ variables: { id } }).then((r) => console.log(r))
     }
   }
-
+  // console.log(task)
   return (
     <>
+      {/*jsonDisplay(task)*/}
       <div className="rw-segment">
         <header className="rw-segment-header">
           <h2 className="rw-heading rw-heading-secondary">
@@ -119,6 +129,14 @@ const Task = ({ task }: Props) => {
             <tr>
               <th>Service id</th>
               <td>{task.serviceId}</td>
+            </tr>
+            <tr>
+              <th>Start</th>
+              <td>{timeTag(task.start)}</td>
+            </tr>
+            <tr>
+              <th>End</th>
+              <td>{timeTag(task.end)}</td>
             </tr>
           </tbody>
         </table>

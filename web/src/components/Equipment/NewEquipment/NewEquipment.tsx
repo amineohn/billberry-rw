@@ -11,7 +11,6 @@ const CREATE_EQUIPMENT_MUTATION = gql`
     }
   }
 `
-
 const NewEquipment = () => {
   const [createEquipment, { loading, error }] = useMutation(
     CREATE_EQUIPMENT_MUTATION,
@@ -26,8 +25,8 @@ const NewEquipment = () => {
     }
   )
 
-  const onSave = (input) => {
-    createEquipment({ variables: { input } })
+  const onSave = (input: string) => {
+    createEquipment({ variables: { input } }).then((r) => console.log(r))
   }
 
   return (
@@ -41,5 +40,4 @@ const NewEquipment = () => {
     </div>
   )
 }
-
 export default NewEquipment

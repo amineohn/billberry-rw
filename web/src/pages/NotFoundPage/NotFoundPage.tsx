@@ -1,44 +1,36 @@
-export default () => (
-  <main>
-    <style
-      dangerouslySetInnerHTML={{
-        __html: `
-              html, body {
-                margin: 0;
-              }
-              html * {
-                box-sizing: border-box;
-              }
-              main {
-                display: flex;
-                align-items: center;
-                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
-                text-align: center;
-                background-color: #E2E8F0;
-                height: 100vh;
-              }
-              section {
-                background-color: white;
-                border-radius: 0.25rem;
-                width: 32rem;
-                padding: 1rem;
-                margin: 0 auto;
-                box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-              }
-              h1 {
-                font-size: 2rem;
-                margin: 0;
-                font-weight: 500;
-                line-height: 1;
-                color: #2D3748;
-              }
-            `,
-      }}
-    />
-    <section>
-      <h1>
-        <span>404 Page Not Found</span>
-      </h1>
-    </section>
-  </main>
-)
+import { navigate } from '@redwoodjs/router'
+
+export default () => {
+  const navigateThisOne = (to: string): string => {
+    return navigate(to) as void as any
+  }
+  const urlExists = (): boolean => {
+    const http = new XMLHttpRequest()
+    http.open('HEAD', navigateThisOne('/'), false)
+    http.send()
+    switch (http.status) {
+      case 200:
+        return true
+      case 404:
+        return false
+      default:
+        return true
+    }
+    return false
+  }
+  if (!urlExists()) {
+    // back to current page
+    navigate('/')
+  }
+  return (
+    <main className={'flex items-center justify-center'}>
+      <section className={'bg-white'} style={{ margin: '45vh auto 50vh auto' }}>
+        <div className={'bg-gray-500 px-6 py-6 rounded-xl'}>
+          <span className={'text-neutral-50 font-semibold text-2xl'}>
+            Page Not Found (404)
+          </span>
+        </div>
+      </section>
+    </main>
+  )
+}

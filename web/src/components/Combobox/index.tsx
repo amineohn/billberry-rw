@@ -2,6 +2,7 @@ import { Fragment, useState } from 'react'
 
 import { Combobox, Transition } from '@headlessui/react'
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid'
+
 interface Props {
   data: string[]
   query: string
@@ -10,11 +11,13 @@ interface Props {
   placeholder?: string
   value?: string
 }
+
 interface Data {
   id: number
   value: string
   name: string
 }
+
 const Combo = ({ data, query, onChange, setQuery }: Props) => {
   const [selected, setSelected] = useState(data)
 

@@ -1,11 +1,5 @@
-import {
-  services,
-  service,
-  createService,
-  updateService,
-  deleteService,
-} from './services'
-import type { StandardScenario } from './services.scenarios'
+import { createService, deleteService, service, services, updateService } from "./services";
+import type { StandardScenario } from "./services.scenarios";
 
 // Generated boilerplate tests do not account for all circumstances
 // and can fail without adjustments, e.g. Float and DateTime types.

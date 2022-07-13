@@ -1,7 +1,7 @@
 import type { FindEquiment } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 
 import Equiment from 'src/components/Equipment/Equiment'
 
@@ -19,11 +19,8 @@ export const Loading = () => <div>Loading...</div>
 export const Empty = () => {
   return (
     <div className="rw-text-center">
-      {'No equiment yet. '}
-      <Link
-        to={routes.newEquipment()}
-        className="rw-link"
-      >
+      <p>{'No equiment yet. '}</p>
+      <Link to={routes.newEquipment()} className="rw-link">
         {'Create one?'}
       </Link>
     </div>

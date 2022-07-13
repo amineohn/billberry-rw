@@ -1,8 +1,7 @@
-import humanize from 'humanize-string'
-
-import { Link, routes, navigate } from '@redwoodjs/router'
+import { Link, navigate, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
+
 import { RWGqlError } from '../../../../interfaces'
 
 const DELETE_SERVICE_MUTATION = gql`
@@ -13,38 +12,6 @@ const DELETE_SERVICE_MUTATION = gql`
   }
 `
 
-const formatEnum = (values: string | string[] | null | undefined) => {
-  if (values) {
-    if (Array.isArray(values)) {
-      const humanizedValues = values.map((value) => humanize(value))
-      return humanizedValues.join(', ')
-    } else {
-      return humanize(values as string)
-    }
-  }
-}
-
-const jsonDisplay = (obj) => {
-  return (
-    <pre>
-      <code>{JSON.stringify(obj, null, 2)}</code>
-    </pre>
-  )
-}
-
-const timeTag = (datetime) => {
-  return (
-    datetime && (
-      <time dateTime={datetime} title={datetime}>
-        {new Date(datetime).toUTCString()}
-      </time>
-    )
-  )
-}
-
-const checkboxInputTag = (checked) => {
-  return <input type="checkbox" checked={checked} disabled />
-}
 interface Props {
   error: RWGqlError | null
   onSave: (data, id) => void
@@ -54,6 +21,7 @@ interface Props {
   }
   loading: boolean
 }
+
 const Service = ({ service }: Props) => {
   const [deleteService] = useMutation(DELETE_SERVICE_MUTATION, {
     onCompleted: () => {
@@ -67,7 +35,7 @@ const Service = ({ service }: Props) => {
 
   const onDeleteClick = (id) => {
     if (confirm('Are you sure you want to delete service ' + id + '?')) {
-      deleteService({ variables: { id } })
+      deleteService({ variables: { id } }).then((r) => console.log(r))
     }
   }
 

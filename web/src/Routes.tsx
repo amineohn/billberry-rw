@@ -7,12 +7,14 @@
 // 'src/pages/HomePage/HomePage.js'         -> HomePage
 // 'src/pages/Admin/BooksPage/BooksPage.js' -> AdminBooksPage
 
-import { Set, Router, Route } from '@redwoodjs/router'
+import { Route, Router, Set } from '@redwoodjs/router'
 
+import ClientsLayout from 'src/layouts/ClientsLayout'
 import ContainersLayout from 'src/layouts/ContainersLayout'
 import CustomersLayout from 'src/layouts/CustomersLayout'
 import EquimentLayout from 'src/layouts/EquimentLayout'
 import MaterialsLayout from 'src/layouts/MaterialsLayout'
+import MissionsLayout from 'src/layouts/MissionsLayout'
 import ServicesLayout from 'src/layouts/ServicesLayout'
 import SitesLayout from 'src/layouts/SitesLayout'
 import TasksLayout from 'src/layouts/TasksLayout'
@@ -23,6 +25,18 @@ import ConfigPage from './pages/Config/ConfigPage'
 const Routes = () => {
   return (
     <Router>
+      <Set wrap={ClientsLayout}>
+        <Route path="/clients/new" page={ClientNewClientPage} name="newClient" />
+        <Route path="/clients/{id:Int}/edit" page={ClientEditClientPage} name="editClient" />
+        <Route path="/clients/{id:Int}" page={ClientClientPage} name="client" />
+        <Route path="/clients" page={ClientClientsPage} name="clients" />
+      </Set>
+      <Set wrap={MissionsLayout}>
+        <Route path="/missions/new" page={MissionNewMissionPage} name="newMission" />
+        <Route path="/missions/{id:Int}/edit" page={MissionEditMissionPage} name="editMission" />
+        <Route path="/missions/{id:Int}" page={MissionMissionPage} name="mission" />
+        <Route path="/missions" page={MissionMissionsPage} name="missions" />
+      </Set>
       <Route path="/login" page={LoginPage} name="login" />
       <Route path="/config" page={ConfigPage} name="config" />
       <Route path="/signup" page={SignupPage} name="signup" />

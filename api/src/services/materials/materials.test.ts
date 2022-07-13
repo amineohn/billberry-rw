@@ -1,11 +1,5 @@
-import {
-  materials,
-  material,
-  createMaterial,
-  updateMaterial,
-  deleteMaterial,
-} from './materials'
-import type { StandardScenario } from './materials.scenarios'
+import { createMaterial, deleteMaterial, material, materials, updateMaterial } from "./materials";
+import type { StandardScenario } from "./materials.scenarios";
 
 // Generated boilerplate tests do not account for all circumstances
 // and can fail without adjustments, e.g. Float and DateTime types.

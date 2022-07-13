@@ -1,5 +1,3 @@
-import humanize from 'humanize-string'
-
 import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
@@ -16,17 +14,6 @@ const DELETE_EQUIPMENT_MUTATION = gql`
 
 const MAX_STRING_LENGTH = 150
 
-const formatEnum = (values: string | string[] | null | undefined) => {
-  if (values) {
-    if (Array.isArray(values)) {
-      const humanizedValues = values.map((value) => humanize(value))
-      return humanizedValues.join(', ')
-    } else {
-      return humanize(values as string)
-    }
-  }
-}
-
 const truncate = (text) => {
   let output = text
   if (text && text.length > MAX_STRING_LENGTH) {
@@ -35,21 +22,8 @@ const truncate = (text) => {
   return output
 }
 
-const jsonTruncate = (obj) => {
-  return truncate(JSON.stringify(obj, null, 2))
-}
-
-const timeTag = (datetime) => {
-  return (
-    datetime && (
-      <time dateTime={datetime} title={datetime}>
-        {new Date(datetime).toUTCString()}
-      </time>
-    )
-  )
-}
-
-const checkboxInputTag = (checked) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const checkboxInputTag = (checked: boolean) => {
   return <input type="checkbox" checked={checked} disabled />
 }
 
@@ -68,15 +42,17 @@ const EquimentList = ({ equiment }) => {
     awaitRefetchQueries: true,
   })
 
-  const onDeleteClick = (id) => {
+  const onDeleteClick = (id: number) => {
     if (confirm('Are you sure you want to delete equipment ' + id + '?')) {
-      deleteEquipment({ variables: { id } })
+      deleteEquipment({ variables: { id } }).then((r) => console.log(r))
     }
   }
+
   interface Props {
     id: number
     name: string
   }
+
   return (
     <div className="rw-segment rw-table-wrapper-responsive">
       <table className="rw-table">

@@ -1,7 +1,7 @@
 import type { FindTasks } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 
 import Tasks from 'src/components/Task/Tasks'
 
@@ -46,7 +46,7 @@ export const Loading = () => <div>Loading...</div>
 export const Empty = () => {
   return (
     <div className="rw-text-center">
-      {'No tasks yet. '}
+      <p>{'No tasks yet.'}</p>
       <Link to={routes.newTask()} className="rw-link">
         {'Create one?'}
       </Link>
@@ -59,5 +59,7 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({ tasks }: CellSuccessProps<FindTasks>) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
   return <Tasks tasks={tasks} />
 }

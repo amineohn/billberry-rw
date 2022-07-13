@@ -1,7 +1,7 @@
 import type { FindServices } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 
 import Services from 'src/components/Service/Services'
 
@@ -19,11 +19,8 @@ export const Loading = () => <div>Loading...</div>
 export const Empty = () => {
   return (
     <div className="rw-text-center">
-      {'No services yet. '}
-      <Link
-        to={routes.newService()}
-        className="rw-link"
-      >
+      <p>{'No services yet. '}</p>
+      <Link to={routes.newService()} className="rw-link">
         {'Create one?'}
       </Link>
     </div>

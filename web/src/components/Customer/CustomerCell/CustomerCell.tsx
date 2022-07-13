@@ -1,6 +1,6 @@
 import type { FindCustomerById } from 'types/graphql'
 
-import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
+import type { CellFailureProps, CellSuccessProps } from '@redwoodjs/web'
 
 import Customer from 'src/components/Customer/Customer'
 
